@@ -2,7 +2,7 @@ Pythonic FP - Gadgets
 =====================
 
 PyPI project
-`pythonic-fp
+`pythonic-fp-gadgets
 <https://pypi.org/project/pythonic-fp>`_.
 
 Library of simple, but useful, data structures with minimal dependencies.

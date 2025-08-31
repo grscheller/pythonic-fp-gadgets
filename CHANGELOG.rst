@@ -17,6 +17,20 @@ See `Semantic Versioning 2.0.0 <https://semver.org>`_.
 Releases and Important Milestones
 ---------------------------------
 
+PyPI v3.0.0 - 2025-08-31
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Discovered I was not quite compliant with Python typing 3.12+ conventions.
+
+- No longer explicitly using TypeVar directly.
+- Removed Unions with Never from .py files
+
+  - only "happy path" return types (pythonic convention)
+  - stubgen actually puts them back in .pyi files
+
+- renamed it.it -> iterate_arguments.ita
+- renamed lca.latest_common_ancestor -> latest_common_ancestor.lca
+
 PyPI v2.2.0 - 2025-08-30
 ~~~~~~~~~~~~~~~~~~~~~~~~
 

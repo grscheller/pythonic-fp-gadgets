@@ -20,11 +20,12 @@ class TestGadgetBox:
 
     def test_box_unchanged(self) -> None:
         box_init_empty: Box[int] = Box()
-        box_init_full = Box(42)
+        box_init_full: Box[int] = Box(42)
 
         if box_init_empty or not box_init_full:
             assert False
 
+        ii: int
         for ii in box_init_empty:
             assert False
 

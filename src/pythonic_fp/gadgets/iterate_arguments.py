@@ -16,10 +16,10 @@
 
 from collections.abc import Iterator
 
-__all__ = ['it']
+__all__ = ['ita']
 
 
-def it[A](*args: A) -> Iterator[A]:
+def ita[A](*args: A) -> Iterator[A]:
     """Function returning an iterator of its arguments.
 
     .. note::

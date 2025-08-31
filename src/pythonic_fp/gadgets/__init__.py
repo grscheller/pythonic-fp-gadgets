@@ -12,19 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Simple Gadgets.
+"""
+Simple Gadgets
+==============
 
 Library of simple, but useful, functions and classes with minimal dependencies.
 
-+-------------------------------------+-----------------------------------+------------------------------+
-| Gadget                              | Description                       | Module                       |
-+=====================================+===================================+==============================+
-| class ``Box``                       | Single item box                   | ``pythonic_fp.gadgets.box``  |
-+-------------------------------------+-----------------------------------+------------------------------+
-| function ``it``                     | Returns iterator of its arguments | ``pythonic_fp.gadgets.it``   |
-+-------------------------------------+-----------------------------------+------------------------------+
-| function ``latest_common_ancestor`` | Find least common base class      | ``pythonic_fp.gadgets.lca``  |
-+-------------------------------------+-----------------------------------+------------------------------+
++------------------------------+------------------+------------------------------------------------+
+| Description                  | Gadget           | Module                                         |
++==============================+==================+================================================+
+| Single item box              | class ``Box``    | ``pythonic_fp.gadgets.box``                    |
++------------------------------+------------------+------------------------------------------------+
+| Return Iterator of arguments | function ``ita`` | ``pythonic_fp.gadgets.iterate_arguments``      |
++------------------------------+------------------+------------------------------------------------+
+| Find least common base class | function ``lca`` | ``pythonic_fp.gadgets.latest_common_ancestor`` |
++------------------------------+------------------+------------------------------------------------+
 
 """
 

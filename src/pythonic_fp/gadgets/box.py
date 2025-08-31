@@ -17,10 +17,8 @@
 __all__ = ['Box']
 
 from collections.abc import Callable, Iterator
-from typing import ClassVar, cast, Final, Never, overload, TypeVar
+from typing import ClassVar, cast, Final, overload
 from pythonic_fp.sentinels.flavored import Sentinel
-
-T = TypeVar('T')
 
 
 class Box[T]:
@@ -83,11 +81,11 @@ class Box[T]:
         return False
 
     @overload
-    def get(self) -> T | Never: ...
+    def get(self) -> T: ...
     @overload
     def get(self, alt: T) -> T: ...
 
-    def get(self, alt: T | Sentinel[str] = Sentinel('_Box')) -> T | Never:
+    def get(self, alt: T | Sentinel[str] = Sentinel('_Box')) -> T:
         """Return the contained item if it exists, otherwise an alternate item.
 
         :param alt: an "optional" item of type ``T`` to return if ``Box`` is empty
@@ -102,7 +100,7 @@ class Box[T]:
             raise ValueError(msg)
         return cast(T, alt)
 
-    def pop(self) -> T | Never:
+    def pop(self) -> T:
         """Pop the contained item if ``Box`` is not empty.
 
         :returns: item contained in the ``Box``
@@ -116,7 +114,7 @@ class Box[T]:
         self._item = self._sentinel
         return popped
 
-    def push(self, item: T) -> None | Never:
+    def push(self, item: T) -> None:
         """Push an item into an empty ``Box``.
 
         :param item: Item to push into the empty ``Box``.
@@ -134,7 +132,7 @@ class Box[T]:
         """Put an item in the Box. Discard any previous contents."""
         self._item = item
 
-    def exchange(self, new_item: T) -> T | Never:
+    def exchange(self, new_item: T) -> T:
         """Exchange an item with what is in the Box.
 
         :param ``new_item``: New item to exchange for current item.
