@@ -17,14 +17,17 @@ See `Semantic Versioning 2.0.0 <https://semver.org>`_.
 Releases and Important Milestones
 ---------------------------------
 
-Update - 2025-08-30
-~~~~~~~~~~~~~~~~~~~
+PyPI v2.2.0 - 2025-08-30
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Moved for pythonic_fp.gadgets package to a new GitHub repo, pythonic-fp-gadgets.
 Replaced it with the empty Python module ``pythonic_fp.name_claim``.
 
 The gadgets package being different from the other namespace packages
 was throwing off my workflow.
+
+- added function it.it
+- added function lca.latest_common_ancestor
 
 Update - 2025-08-09
 ~~~~~~~~~~~~~~~~~~~
