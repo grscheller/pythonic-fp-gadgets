@@ -17,6 +17,11 @@ See `Semantic Versioning 2.0.0 <https://semver.org>`_.
 Releases and Important Milestones
 ---------------------------------
 
+PyPI v3.0.1 - 2025-09-09
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Corrected incorrect dependencies.
+
 PyPI v3.0.0 - 2025-08-31
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
