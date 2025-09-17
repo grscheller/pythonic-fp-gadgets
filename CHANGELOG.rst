@@ -25,13 +25,15 @@ Corrected incorrect dependencies.
 PyPI v3.0.0 - 2025-08-31
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Discovered I was not quite compliant with Python typing 3.12+ conventions.
+Discovered I was not quite compliant with
+Python typing 3.12+ conventions.
 
 - No longer explicitly using TypeVar directly.
-- Removed Unions with Never from .py files
 
-  - only "happy path" return types (pythonic convention)
-  - stubgen actually puts them back in .pyi files
+  - Removed Unions with Never from .py files
+
+    - the "happy path" returns just types (pythonic convention)
+    - stubgen actually puts them back in .pyi files
 
 - renamed it.it -> iterate_arguments.ita
 - renamed lca.latest_common_ancestor -> latest_common_ancestor.lca
@@ -39,11 +41,12 @@ Discovered I was not quite compliant with Python typing 3.12+ conventions.
 PyPI v2.2.0 - 2025-08-30
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Moved for pythonic_fp.gadgets package to a new GitHub repo, pythonic-fp-gadgets.
-Replaced it with the empty Python module ``pythonic_fp.name_claim``.
+Moved for pythonic_fp.gadgets package to a new GitHub repo,
+pythonic-fp-gadgets. Replaced it with the empty Python
+module pythonic_fp.name_claim in pythonic-fp.
 
-The gadgets package being different from the other namespace packages
-was throwing off my workflow.
+The gadgets package being different from the other namespace
+packages was throwing off my workflow.
 
 - added function it.it
 - added function lca.latest_common_ancestor
@@ -64,6 +67,7 @@ Released pythonic-fp v1.1.0 which contains pythonic_fp.gadgets package.
 Update - 2025-08-01
 ~~~~~~~~~~~~~~~~~~~
 
-Added package pythonic_fp.gadgets to the "name-claim" PyPI project pythonic-fp.
-The gadgets library is for simple, but useful, functions and data structures
-with minimal dependencies.
+Added package pythonic_fp.gadgets to the "name-claim" PyPI
+project pythonic-fp. The gadgets library is for simple,
+but useful, functions and data structures with minimal
+dependencies.
