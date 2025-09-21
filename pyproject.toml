@@ -1,6 +1,6 @@
 [project]
 name = "pythonic-fp-gadgets"
-version = "3.0.2"
+version = "3.1.0"
 readme = "README.rst"
 requires-python = ">=3.13"
 license = { file = "LICENSE" }
@@ -17,9 +17,7 @@ classifiers = [
   "Programming Language :: Python :: 3.13",
   "Typing :: Typed",
 ]
-dependencies = [
-  "pythonic-fp-sentinels>=2.1.1",
-]
+dependencies = []
 dynamic = ["description"]
 
 [project.urls]
@@ -31,6 +29,7 @@ Source = "https://github.com/grscheller/pythonic-fp-gadgets"
 [project.optional-dependencies]
 test = [
   "pytest>=8.4.1",
+  "pythonic-fp-circulararray>=5.3.3",
 ]
 
 [build-system]

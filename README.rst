@@ -5,11 +5,13 @@ PyPI project
 `pythonic-fp-gadgets
 <https://pypi.org/project/pythonic-fp>`_.
 
-Library of simple, but useful, data structures with minimal dependencies.
+Library of simple, but useful, classes and functions with no dependencies
+outside the Python Standard Library.
 
-- single item box
-- function returning iterator of its arguments
-- find the last common ancestor of two classes
+- Gadgets
+  - single item box
+  - function returning iterator of its arguments
+  - find the latest common ancestor of two classes
 
 This PyPI project is part of of the grscheller
 `pythonic-fp namespace projects

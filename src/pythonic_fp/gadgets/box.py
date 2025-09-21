@@ -17,8 +17,10 @@
 __all__ = ['Box']
 
 from collections.abc import Callable, Iterator
-from typing import ClassVar, cast, Final, overload
-from pythonic_fp.sentinels.flavored import Sentinel
+from typing import cast, Final, overload
+
+type _Sentinel = object
+_sentinel: Final[_Sentinel] = object()
 
 
 class Box[T]:
@@ -40,23 +42,19 @@ class Box[T]:
     __slots__ = ('_item',)
     __match_args__ = ('_item',)
 
-    _sentinel: Final[ClassVar[Sentinel[str]]] = Sentinel('_Box')
-
     @overload
     def __init__(self) -> None: ...
     @overload
     def __init__(self, item: T) -> None: ...
 
-    def __init__(self, item: T | Sentinel[str] = Sentinel('_Box')) -> None:
+    def __init__(self, item: T | _Sentinel = _sentinel) -> None:
         """
-        :param item: an "optional" initial contained ``item`` for the ``Box``.
-        :returns: New ``Box`` instance.
-
+        :param item: An "optional" initial contained ``item`` for the ``Box``.
         """
         self._item = item
 
     def __bool__(self) -> bool:
-        return self._item is not Sentinel('_Box')
+        return self._item is not _sentinel
 
     def __iter__(self) -> Iterator[T]:
         if self:
@@ -85,7 +83,7 @@ class Box[T]:
     @overload
     def get(self, alt: T) -> T: ...
 
-    def get(self, alt: T | Sentinel[str] = Sentinel('_Box')) -> T:
+    def get(self, alt: T | _Sentinel = _sentinel) -> T:
         """Return the contained item if it exists, otherwise an alternate item.
 
         :param alt: an "optional" item of type ``T`` to return if ``Box`` is empty
@@ -93,9 +91,9 @@ class Box[T]:
         :raises ValueError: when an ``alt`` item is not provided but needed
 
         """
-        if self._item is not self._sentinel:
+        if self._item is not _sentinel:
             return cast(T, self._item)
-        if alt is self._sentinel:
+        if alt is _sentinel:
             msg = 'Box: get from empty Box with no alternate return item provided'
             raise ValueError(msg)
         return cast(T, alt)
@@ -103,15 +101,15 @@ class Box[T]:
     def pop(self) -> T:
         """Pop the contained item if ``Box`` is not empty.
 
-        :returns: item contained in the ``Box``
-        :raises: ``ValueError`` if Box is empty
+        :returns: The item contained in the ``Box``.
+        :raises ValueError: If Box is empty.
 
         """
-        if self._item is self._sentinel:
+        if self._item is _sentinel:
             msg = 'Box: Trying to pop an item from an empty Box'
             raise ValueError(msg)
         popped = cast(T, self._item)
-        self._item = self._sentinel
+        self._item = _sentinel
         return popped
 
     def push(self, item: T) -> None:
@@ -121,7 +119,7 @@ class Box[T]:
         :raises ValueError: If ``Box`` is not empty.
 
         """
-        if self._item is Sentinel('_Box'):
+        if self._item is _sentinel:
             self._item = item
         else:
             msg = 'Box: Trying to push an item in a non-empty Box'
@@ -139,7 +137,7 @@ class Box[T]:
         :returns: Original contents of the ``Box``.
         :raises ValueError: If Box is empty.
         """
-        if self._item is self._sentinel:
+        if self._item is _sentinel:
             msg = 'Box: Trying to exchange items from an empty Box'
             raise ValueError(msg)
         popped = cast(T, self._item)
@@ -154,7 +152,7 @@ class Box[T]:
         :returns: a new instance
 
         """
-        if self._item is Sentinel('_Box'):
+        if self._item is _sentinel:
             return Box()
         return Box(f(cast(T, self._item)))
 
@@ -165,6 +163,6 @@ class Box[T]:
         :returns: a new instance
 
         """
-        if self._item is self._sentinel:
+        if self._item is _sentinel:
             return Box()
         return f(cast(T, self._item))
