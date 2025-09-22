@@ -13,18 +13,16 @@
 # limitations under the License.
 
 """
-Sentinels
-=========
+Sentinels with Extras
+=====================
 
-Sentinel classes implemented as singletons, ``H`` is bounded by Hashable.
-
-+-----------------------+-----------------+-------------------------------------------------+
-| Module                | Class           | Represents                                      |
-+=======================+=================+=================================================+
-| ``sentinel.novalue``  | ``NoValue``     | actually missing value, not potentially missing |
-+-----------------------+-----------------+-------------------------------------------------+
-| ``sentinel.flavored`` | ``Sentinel[H]`` | distinct sentinels labeled by hashable values   |
-+-----------------------+-----------------+-------------------------------------------------+
++-----------------------+---------------------------+-----------------------------------------------+
+| Module                | Class                     | Represents                                    |
++=======================+===========================+===============================================+
+| ``sentinel.novalue``  | ``NoValue``               | an actually , not potentially, missing value  |
++-----------------------+---------------------------+-----------------------------------------------+
+| ``sentinel.flavored`` | ``Sentinel[H: Hashable]`` | distinct sentinels labeled by hashable values |
++-----------------------+---------------------------+-----------------------------------------------+
 
 """
 

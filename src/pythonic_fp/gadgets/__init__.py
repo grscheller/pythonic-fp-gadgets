@@ -16,17 +16,21 @@
 Simple Gadgets
 ==============
 
-Library of simple, but useful, functions and classes with minimal dependencies.
+Library of simple, but useful, functions and classes with no external
+dependencies besides the those from the Python standard Library. This
+includes other Pythonic Functional Programming dependencies.
 
-+------------------------------+------------------+------------------------------------------------+
-| Description                  | Gadget           | Module                                         |
-+==============================+==================+================================================+
-| Single item box              | class ``Box``    | ``pythonic_fp.gadgets.box``                    |
-+------------------------------+------------------+------------------------------------------------+
-| Return Iterator of arguments | function ``ita`` | ``pythonic_fp.gadgets.iterate_arguments``      |
-+------------------------------+------------------+------------------------------------------------+
-| Find least common base class | function ``lca`` | ``pythonic_fp.gadgets.latest_common_ancestor`` |
-+------------------------------+------------------+------------------------------------------------+
++------------------------------+----------------------+------------------------------------------------+
+| Description                  | Gadget               | Module                                         |
++==============================+======================+================================================+
+| Single item box              | class ``Box``        | ``pythonic_fp.gadgets.box``                    |
++------------------------------+----------------------+------------------------------------------------+
+| Return Iterator of arguments | function ``ita``     | ``pythonic_fp.gadgets.iterate_arguments``      |
++------------------------------+----------------------+------------------------------------------------+
+| Find least common base class | function ``lca``     | ``pythonic_fp.gadgets.latest_common_ancestor`` |
++------------------------------+----------------------+------------------------------------------------+
+| sentinels values with extras | module ``sentinals`` | ``pythonic_fp.gadgets.sentinels``              |
++------------------------------+----------------------+------------------------------------------------+
 
 """
 
