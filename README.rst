@@ -15,7 +15,7 @@ outside the Python Standard Library.
 
 Part of the
 `pythonic-fp
-<https://grscheller.github.io/pythonic-fp/overview/next/build/html/index.html>`_
+<https://grscheller.github.io/pythonic-fp/homepage/build/html/index.html>`_
 PyPI projects.
 
 Documentation
