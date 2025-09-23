@@ -13,9 +13,10 @@ outside the Python Standard Library.
   - function returning iterator of its arguments
   - find the latest common ancestor of two classes
 
-This PyPI project is part of of the grscheller
-`pythonic-fp namespace projects
-<https://github.com/grscheller/pythonic-fp/blob/main/README.md>`_
+Part of the
+`pythonic-fp
+<https://grscheller.github.io/pythonic-fp/overview/next/build/html/index.html>`_
+PyPI projects.
 
 Documentation
 -------------
