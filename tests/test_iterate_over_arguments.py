@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from pythonic_fp.circulararray.auto import ca, CA
-from pythonic_fp.gadgets.iterate_arguments import ita
+from pythonic_fp.gadgets import iterate_over_arguments as ita
 
 class TestGadgetIt:
     """Functionality testing"""
