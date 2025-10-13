@@ -17,6 +17,15 @@ See `Semantic Versioning 2.0.0 <https://semver.org>`_.
 Releases and Important Milestones
 ---------------------------------
 
+PyPI v4.0.0 - TBD
+~~~~~~~~~~~~~~~~~
+
+Move functions out of their own packages to __init__.py (2025-10-13).
+
+- latest_common_ancestor.lca -> first_common_ancestor
+- iterate_arguments.ita -> iterate_over_arguments
+
+
 PyPI v3.0.1 - 2025-09-09
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
