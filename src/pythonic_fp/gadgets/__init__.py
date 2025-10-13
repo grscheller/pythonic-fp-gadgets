@@ -23,11 +23,13 @@ includes other Pythonic Functional Programming dependencies.
 +------------------------------+----------------------+------------------------------------------------+
 | Description                  | Gadget               | Module                                         |
 +==============================+======================+================================================+
-| Single item box              | class ``Box``        | ``pythonic_fp.gadgets.box``                    |
-+------------------------------+----------------------+------------------------------------------------+
 | Return Iterator of arguments | function ``ita``     | ``pythonic_fp.gadgets.iterate_arguments``      |
 +------------------------------+----------------------+------------------------------------------------+
 | Find least common base class | function ``lca``     | ``pythonic_fp.gadgets.latest_common_ancestor`` |
++------------------------------+----------------------+------------------------------------------------+
+| Single item box              | class ``Box``        | ``pythonic_fp.gadgets.box``                    |
++------------------------------+----------------------+------------------------------------------------+
+| Wrapped hashable item        | class ``Wrap``       | ``pythonic_fp.gadgets.wrap``                   |
 +------------------------------+----------------------+------------------------------------------------+
 | sentinels values with extras | module ``sentinals`` | ``pythonic_fp.gadgets.sentinels``              |
 +------------------------------+----------------------+------------------------------------------------+
