@@ -13,28 +13,13 @@
 # limitations under the License.
 
 """
-Simple Gadgets
-==============
-
-Library of simple, but useful, functions and classes with no external
-dependencies besides the those from the Python standard Library. This
-includes other Pythonic Functional Programming dependencies.
-
-+----------------------+------------------------------+------------------------------------+
-| Gadget               | Description                  | Module                             |
-+======================+==============================+====================================+
-| function ``ita``     | Return Iterator of arguments | ``gadgets.iterate_arguments``      |
-+----------------------+------------------------------+------------------------------------+
-| function ``lca``     | Find least common base class | ``gadgets.latest_common_ancestor`` |
-+----------------------+------------------------------+------------------------------------+
-| class ``Box``        | Single item box              | ``gadgets.box``                    |
-+----------------------+------------------------------+------------------------------------+
-| class ``Wrap``       | Wrapped item                 | ``gadgets.wrap``                   |
-+----------------------+------------------------------+------------------------------------+
-| class ``HWrap``      | Wrapped hashable item        | ``gadgets.wrap``                   |
-+----------------------+------------------------------+------------------------------------+
-| module ``sentinels`` | Sentinels values with extras | ``gadgets.sentinels``              |
-+----------------------+------------------------------+------------------------------------+
++----------------------------+--------------------------------------------------+
+| Function                   | Description                                      |
++============================+==================================================+
+| ``first_common_ancestor``  | Find least common base class in a type hierarchy |
++----------------------------+--------------------------------------------------+
+| ``iterate_over_arguments`` | Return an iterator over the function's arguments |
++----------------------------+--------------------------------------------------+
 
 """
 
@@ -78,12 +63,12 @@ def first_common_ancestor(cls1: type, cls2: type) -> type:
         - type 'bool' is not an acceptable base type
 
         This happens frequently when the function is given
-        Python builtin types.
+        Python builtin types or in multiple inheritance situations.
 
     :param cls1: A class in the inheritance hierarchy.
     :param cls2: A class in the inheritance hierarchy.
     :returns: First common ancestor based on getmro order.
-    :raises TypeError: Raised by ``inspect.getmto``.
+    :raises TypeError: Raised by ``inspect.getmro``.
 
     """
     if issubclass(cls1, cls2):

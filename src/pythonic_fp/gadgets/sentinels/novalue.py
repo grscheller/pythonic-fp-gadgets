@@ -13,66 +13,78 @@
 # limitations under the License.
 
 """
-Missing Value Sentinel
-======================
+**Singleton class representing an actually, not potentially, missing value.**
 
-Singleton class representing a missing value.
+.. note:
 
-In untyped Python, both ``None`` and ``()`` are often used by end users
-and libraries as sentinel values. I prefer to think of them as
+    ``NoValue()`` is a singleton object representing a missing value.
 
-- ``None``: returned (or returns) no values
-- ``()``: an empty, possibly typed, but still iterable collection
+    While ``None`` and ``()`` are frequently used as sentinel values,
+    I prefer to think of them as
 
-While ``NoValue()`` is a singleton object representing a missing value.
+    - ``None``: Returns, or returned, no values.
+    - ``()``: An empty, possibly typed, iterable collection.
 
-Given variables
+.. important::
 
-.. code:: python
+    Given variables
 
-    x: int | NoValue
-    y: int | NoValue
+    .. code:: python
 
-Equality between ``x`` and ``y`` means both values exist and compare as equal.
-If one or both of theses values are missing, then what is there to compare?
+        x: int | NoValue
+        y: int | NoValue
 
-.. table:: ``x == y``
+    Equality between ``x`` and ``y`` means both values exist and compare
+    as equal. If one or both of theses values are missing, then what is
+    there to compare?
 
-    +-----------+-----------+--------+--------+
-    |    x∖y    | NoValue() | 42     | 57     |
-    +===========+===========+========+========+
-    | NoValue() | false     | false  | false  |
-    +-----------+-----------+--------+--------+
-    | 42        | false     | true   | false  |
-    +-----------+-----------+--------+--------+
-    | 57        | false     | false  | true   |
-    +-----------+-----------+--------+--------+
+    .. table:: ``x == y``
 
-Similarly for not equals.
+        +-----------+-----------+--------+--------+
+        |    x∖y    | NoValue() | 42     | 57     |
+        +===========+===========+========+========+
+        | NoValue() | false     | false  | false  |
+        +-----------+-----------+--------+--------+
+        | 42        | false     | true   | false  |
+        +-----------+-----------+--------+--------+
+        | 57        | false     | false  | true   |
+        +-----------+-----------+--------+--------+
 
-.. table:: ``x != y``
+    Similarly for not equals.
 
-    +-----------+-----------+--------+--------+
-    |    x∖y    | NoValue() | 42     | 57     |
-    +===========+===========+========+========+
-    | NoValue() | false     | false  | false  |
-    +-----------+-----------+--------+--------+
-    | 42        | false     | false  | true   |
-    +-----------+-----------+--------+--------+
-    | 57        | false     | true   | false  |
-    +-----------+-----------+--------+--------+
+    .. table:: ``x != y``
+
+        +-----------+-----------+--------+--------+
+        |    x∖y    | NoValue() | 42     | 57     |
+        +===========+===========+========+========+
+        | NoValue() | false     | false  | false  |
+        +-----------+-----------+--------+--------+
+        | 42        | false     | false  | true   |
+        +-----------+-----------+--------+--------+
+        | 57        | false     | true   | false  |
+        +-----------+-----------+--------+--------+
+
+.. warning::
+
+    Only use ``==`` or ``!=`` in value comparisons. To directly
+    identity the ``NoValue`` singleton, use ``is`` and ``is not``
+    instead.
 
 .. note::
 
     Threadsafe.
 
-.. warning::
+.. tip::
 
-    Do not use ``==`` or ``!=`` to identify ``NoValue()``,  compare
-    directly by identity using ``is`` and ``is not``.
+    Use as a hidden implementation detail when creating "optional"
+    arguments to functions and methods.
 
+    To help ensure the abstraction does not leak,
+
+    - Do not export the sentinel value.
+    - Use ``@overload`` to keep the NoValue type out of documentation and IDEs.
+ 
 """
-
 import threading
 from typing import ClassVar, final
 
@@ -100,7 +112,13 @@ class NoValue():
         return 'NoValue()'
 
     def __eq__(self, other: object) -> bool:
+        """
+        :returns: False
+        """
         return False
 
     def __ne__(self, other: object) -> bool:
+        """
+        :returns: False
+        """
         return False

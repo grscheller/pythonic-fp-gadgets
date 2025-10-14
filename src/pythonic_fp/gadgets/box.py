@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Class for a stateful container that can hold at most one item."""
-
 __all__ = ['Box']
 
 from collections.abc import Callable, Iterator
@@ -28,8 +26,8 @@ class Box[T]:
 
     .. note::
 
-         - ``Box(item: T)``: contains at one item of type ``T``
-         - ``Box[T]()``: creates empty container
+       - ``Box(item: T)``: contains at one item of type ``T``
+       - ``Box[T]()``: creates empty container
 
        Where type ``T`` is some definite type, which
        could be ``None`` or even ``Never``.
@@ -43,9 +41,9 @@ class Box[T]:
     __match_args__ = ('_item',)
 
     @overload
-    def __init__(self) -> None: ...
-    @overload
     def __init__(self, item: T) -> None: ...
+    @overload
+    def __init__(self) -> None: ...
 
     def __init__(self, item: T | _Sentinel = _sentinel) -> None:
         """

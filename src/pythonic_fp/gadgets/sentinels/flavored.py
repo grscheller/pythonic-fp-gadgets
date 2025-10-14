@@ -13,15 +13,7 @@
 # limitations under the License.
 
 """
-Flavored Sentinels
-==================
-
-Sentinel values labeled by different (hashable) flavors. Can be used
-with functions or classes.
-
-.. note::
-
-    Threadsafe.
+**Sentinel values labeled by different (hashable) flavors.**
 
 .. note::
 
@@ -35,15 +27,9 @@ with functions or classes.
     To ensure that reference equality is used, put the known
     sentinel value first in the comparison.
 
-.. tip::
+.. note::
 
-    Use as a hidden implementation detail when creating "optional"
-    arguments to functions and methods. Do not export the sentinel
-    value.
-
-    - does not clash with end user code
-
-      - which may be using either ``None`` or ``()`` as a "sentinel" values
+    Threadsafe.
 
 """
 

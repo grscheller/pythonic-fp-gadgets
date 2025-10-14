@@ -12,20 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
-Sentinels with Extras
-=====================
-
-+---------------------------+-----------------------------------------------+-----------------------+
-| Gadget                    | Description                                   | Module                |
-+===========================+===============================================+=======================+
-| ``NoValue``               | an actually , not potentially, missing value  | ``sentinel.novalue``  |
-+---------------------------+-----------------------------------------------+-----------------------+
-| ``Sentinel[H: Hashable]`` | distinct sentinels labeled by hashable values | ``sentinel.flavored`` |
-+---------------------------+-----------------------------------------------+-----------------------+
-
-"""
-
 __author__ = 'Geoffrey R. Scheller'
 __copyright__ = 'Copyright (c) 2023-2025 Geoffrey R. Scheller'
 __license__ = 'Apache License 2.0'

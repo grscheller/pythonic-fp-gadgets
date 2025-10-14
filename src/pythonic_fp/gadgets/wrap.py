@@ -12,20 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Class for an immutable container that holds exactly one item."""
-
 __all__ = ['Wrap', 'HWrap']
 
 from collections.abc import Callable, Iterator, Hashable
 
 
 class Wrap[T]():
-    """
-    Immutable container holding exactly one hashable item of a given type.
+    """Immutablely wrap exactly one value of a given type.
 
     .. tip::
 
-        Use a Python match statement to get the item,
+        ``Wrap`` objects can be used in Python match statements.
 
     """
     __slots__ = ('_item',)
@@ -53,10 +50,10 @@ class Wrap[T]():
         return self._item == other._item
 
     def map[U](self, f: Callable[[T], U]) -> 'Wrap[U]':
-        """Map function ``f`` over contents. We need to return a new instance.
+        """Map function ``f`` over contents.
 
-        :param f: mapping function
-        :returns: a new instance
+        :param f: Mapping function.
+        :returns: A new instance.
 
         """
         return Wrap(f(self._item))
@@ -64,20 +61,19 @@ class Wrap[T]():
     def bind[U](self, f: Callable[[T], 'Wrap[U]']) -> 'Wrap[U]':
         """Flatmap the ``Wrap`` with function ``f``.
 
-        :param f: binding function
-        :returns: a new instance
+        :param f: Binding function.
+        :returns: A new instance.
 
         """
         return f(self._item)
 
 
 class HWrap[T: Hashable](Hashable):
-    """
-    Immutable container holding exactly one hashable item of a given type.
+    """Immutablely wrap exactly one hashable value of a given type.
 
     .. tip::
 
-        Use a Python match statement to get the item,
+        ``Wrap`` objects can be used in Python match statements.
 
     """
     __slots__ = ('_item', '_hash')
@@ -110,10 +106,10 @@ class HWrap[T: Hashable](Hashable):
         return self._item == other._item
 
     def map[U](self, f: Callable[[T], U]) -> 'HWrap[U]':
-        """Map function ``f`` over contents. We need to return a new instance.
+        """Map function ``f`` over contents.
 
-        :param f: mapping function
-        :returns: a new instance
+        :param f: Mapping function.
+        :returns: A new instance.
 
         """
         return HWrap(f(self._item))
@@ -121,8 +117,8 @@ class HWrap[T: Hashable](Hashable):
     def bind[U](self, f: Callable[[T], 'HWrap[U]']) -> 'HWrap[U]':
         """Flatmap the ``Wrap`` with function ``f``.
 
-        :param f: binding function
-        :returns: a new instance
+        :param f: Binding function.
+        :returns: A new instance.
 
         """
         return f(self._item)
