@@ -13,13 +13,14 @@
 # limitations under the License.
 
 """
-+----------------------------+--------------------------------------------------+
-| Function                   | Description                                      |
-+============================+==================================================+
-| ``first_common_ancestor``  | Find least common base class in a type hierarchy |
-+----------------------------+--------------------------------------------------+
-| ``iterate_over_arguments`` | Return an iterator over the function's arguments |
-+----------------------------+--------------------------------------------------+
+**Module level function names.**
+
+========================== ================================================
+Function                   Description                                     
+========================== ================================================
+``first_common_ancestor``  Find least common base class in a type hierarchy
+``iterate_over_arguments`` Return an iterator over the function's arguments
+========================== ================================================
 
 """
 
@@ -48,7 +49,7 @@ def iterate_over_arguments[A](*args: A) -> Iterator[A]:
 
     """
     yield from args
-    
+
 
 def first_common_ancestor(cls1: type, cls2: type) -> type:
     """Find the least upper bound in the inheritance graph
@@ -79,4 +80,4 @@ def first_common_ancestor(cls1: type, cls2: type) -> type:
     for common_ancestor in getmro(type('LcaDiamondClass', (cls1, cls2), {})):
         if issubclass(cls1, common_ancestor) and issubclass(cls2, common_ancestor):
             return common_ancestor
-    raise TypeError("latest_common_ancestor: no common ancestor found!!!") 
+    raise TypeError("latest_common_ancestor: no common ancestor found!!!")
