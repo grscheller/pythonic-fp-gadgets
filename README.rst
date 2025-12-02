@@ -9,6 +9,7 @@ Library of simple, but useful, classes and functions with no dependencies
 outside the Python Standard Library.
 
 - Gadgets
+
   - single item box
   - function returning iterator of its arguments
   - find the latest common ancestor of two classes
