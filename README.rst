@@ -12,7 +12,7 @@ outside the Python Standard Library.
 
   - single item box
   - function returning iterator of its arguments
-  - find the latest common ancestor of two classes
+  - function to find the latest common ancestor of two classes
 
 Part of the
 `pythonic-fp

@@ -12,43 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
-**Module level function names.**
-
-========================== ================================================
-Function                   Description                                     
-========================== ================================================
-``first_common_ancestor``  Find least common base class in a type hierarchy
-``iterate_over_arguments`` Return an iterator over the function's arguments
-========================== ================================================
-
-"""
+"""Gadgets"""
 
 from collections.abc import Iterator
 from inspect import getmro
 
-__all__ = ['iterate_over_arguments', 'first_common_ancestor']
+__all__ = ['first_common_ancestor', 'iterate_over_arguments']
 
 __author__ = 'Geoffrey R. Scheller'
 __copyright__ = 'Copyright (c) 2023-2025 Geoffrey R. Scheller'
 __license__ = 'Apache License 2.0'
-
-
-def iterate_over_arguments[A](*args: A) -> Iterator[A]:
-    """Function returning an iterator of its arguments.
-
-    .. note::
-
-        Does not create an object to iterate over.
-
-        - well, not in the Python world
-        - maybe in the C world
-
-    :param args: Objects to iterate over.
-    :returns: An iterator of the arguments.
-
-    """
-    yield from args
 
 
 def first_common_ancestor(cls1: type, cls2: type) -> type:
@@ -81,3 +54,20 @@ def first_common_ancestor(cls1: type, cls2: type) -> type:
         if issubclass(cls1, common_ancestor) and issubclass(cls2, common_ancestor):
             return common_ancestor
     raise TypeError("latest_common_ancestor: no common ancestor found!!!")
+
+
+def iterate_over_arguments[A](*args: A) -> Iterator[A]:
+    """Function returning an iterator of its arguments.
+
+    .. note::
+
+        Does not create an object to iterate over.
+
+        - well, not in the Python world
+        - maybe in the C world
+
+    :param args: Objects to iterate over.
+    :returns: An iterator of the arguments.
+
+    """
+    yield from args
