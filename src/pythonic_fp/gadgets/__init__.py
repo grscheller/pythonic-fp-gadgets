@@ -12,7 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Gadgets"""
+"""
+Gadgets
+-------
+
+.. admonition:: Collection of mostly self-contained functions and classes
+
+    - Functions and classes which could go multiple places or have
+      no good place to go.
+    - Self-contained with minimal dependencies.
+    - No pythonic_fp dependencies.
+
+"""
 
 from collections.abc import Iterator
 from inspect import getmro
@@ -42,7 +53,8 @@ def first_common_ancestor(cls1: type, cls2: type) -> type:
     :param cls1: A class in the inheritance hierarchy.
     :param cls2: A class in the inheritance hierarchy.
     :returns: First common ancestor based on getmro order.
-    :raises TypeError: Raised by ``inspect.getmro``.
+    :raises TypeError: Raised when no common ancestor or not
+                       caught when raised by ``inspect.getmro``.
 
     """
     if issubclass(cls1, cls2):
@@ -67,7 +79,7 @@ def iterate_over_arguments[A](*args: A) -> Iterator[A]:
         - maybe in the C world
 
     :param args: Objects to iterate over.
-    :returns: An iterator of the arguments.
+    :returns: An iterator of the functions arguments.
 
     """
     yield from args

@@ -13,7 +13,9 @@
 # limitations under the License.
 
 """
-**Sentinel values labeled by different (hashable) flavors.**
+.. admonition:: Sentinel values labeled by different (hashable) flavors.
+
+    When different flavors of the truth are needed.
 
 .. note::
 

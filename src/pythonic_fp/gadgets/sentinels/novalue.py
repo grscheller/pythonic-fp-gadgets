@@ -13,9 +13,8 @@
 # limitations under the License.
 
 """
-**Singleton class representing an actually, not potentially, missing value.**
-
-.. note:
+.. admonition:: Singleton class representing an actually,
+                not potentially, missing value.
 
     ``NoValue()`` is a singleton object representing a missing value.
 
@@ -52,7 +51,7 @@
 
     Similarly for not equals.
 
-    .. table:: ``x != y``
+    .. table:: ``x != y``:wq
 
         +-----------+-----------+--------+--------+
         |    x∖y    | NoValue() | 42     | 57     |
@@ -113,12 +112,12 @@ class NoValue():
 
     def __eq__(self, other: object) -> bool:
         """
-        :returns: False
+        :returns: ``False``
         """
         return False
 
     def __ne__(self, other: object) -> bool:
         """
-        :returns: False
+        :returns: ``False``
         """
         return False

@@ -42,6 +42,14 @@ class Wrap[T]():
         return 'Wrap(' + repr(self._item) + ')'
 
     def __eq__(self, other: object) -> bool:
+        """
+        Efficiently compare to another object.
+
+        :param other: The object to be compared with,
+        :returns: ``True`` if ``other`` is of type Wrap and wraps
+                  an object which compares as equal to the wrapped
+                  object, otherwise ``False``.
+        """
         if not isinstance(other, type(self)):
             return False
 
@@ -73,7 +81,11 @@ class HWrap[T: Hashable](Hashable):
 
     .. tip::
 
-        ``Wrap`` objects can be used in Python match statements.
+        ``HWrap`` objects can be used in Python match statements.
+
+    .. tip::
+
+        ``HWrap`` objects are hashable..
 
     """
     __slots__ = ('_item', '_hash')
@@ -96,6 +108,14 @@ class HWrap[T: Hashable](Hashable):
         return 'Wrap(' + repr(self._item) + ')'
 
     def __eq__(self, other: object) -> bool:
+        """
+        Efficiently compare to another object.
+
+        :param other: The object to be compared with,
+        :returns: ``True`` if ``other`` is of type HWrap and wraps
+                  an object which compares as equal to the wrapped
+                  object, otherwise ``False``.
+        """
         if not isinstance(other, type(self)):
             return False
 

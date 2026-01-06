@@ -47,7 +47,8 @@ class Box[T]:
 
     def __init__(self, item: T | _Sentinel = _sentinel) -> None:
         """
-        :param item: An "optional" initial contained ``item`` for the ``Box``.
+        :param item: An optional initial contained ``item``
+                     for the ``Box``.
         """
         self._item = item
 
@@ -67,6 +68,14 @@ class Box[T]:
         return 1 if self else 0
 
     def __eq__(self, other: object) -> bool:
+        """
+        Efficiently compare to another object.
+
+        :param other: The object to be compared with,
+        :returns: ``True`` if ``other`` is of type Box and contains
+                  an object which compares as equal to the object
+                  contained in the ``Box``, otherwise ``False``.
+        """
         if not isinstance(other, type(self)):
             return False
 
@@ -82,11 +91,15 @@ class Box[T]:
     def get(self, alt: T) -> T: ...
 
     def get(self, alt: T | _Sentinel = _sentinel) -> T:
-        """Return the contained item if it exists, otherwise an alternate item.
+        """Return the contained item, if it exists, otherwise
+        an alternate item, if given.
 
-        :param alt: an "optional" item of type ``T`` to return if ``Box`` is empty
-        :returns: contents of ``Box``, or an alternate item if given and ``Box`` empty
-        :raises ValueError: when an ``alt`` item is not provided but needed
+        :param alt: An optional item of type ``T`` to return 
+                    if the ``Box`` is empty.
+        :returns: Contents of ``Box`` or an alternate item, if given,
+                  when the ``Box`` is empty.
+        :raises ValueError: When the ``alt`` item is not provided
+                            but needed.
 
         """
         if self._item is not _sentinel:
@@ -146,8 +159,8 @@ class Box[T]:
         """Map function ``f`` over contents. We need to return a new
         instance since the type of Box can change.
 
-        :param f: mapping function
-        :returns: a new instance
+        :param f: Mapping function.
+        :returns: A new instance.
 
         """
         if self._item is _sentinel:
@@ -157,8 +170,8 @@ class Box[T]:
     def bind[U](self, f: Callable[[T], 'Box[U]']) -> 'Box[U]':
         """Flatmap ``Box`` with function ``f``.
 
-        :param f: binding function
-        :returns: a new instance
+        :param f: Binding function.
+        :returns: A new instance.
 
         """
         if self._item is _sentinel:
