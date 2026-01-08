@@ -17,8 +17,8 @@ See `Semantic Versioning 2.0.0 <https://semver.org>`_.
 Releases and Important Milestones
 ---------------------------------
 
-PyPI 4.0.2 - 2026-01-TBD
-~~~~~~~~~~~~~~~~~~~~~~~~
+PyPI 4.0.2 - 2026-01-08
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Docstring improvements based on lessons learned from my PyPI
 boring-math-abstract-algebra project.
