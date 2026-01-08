@@ -11,8 +11,10 @@ outside the Python Standard Library.
 - Gadgets
 
   - single item box
+  - wrapped (hashable) references
   - function returning iterator of its arguments
   - function to find the latest common ancestor of two classes
+  - sentinel values
 
 Part of the
 `pythonic-fp
