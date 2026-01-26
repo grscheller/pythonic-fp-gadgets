@@ -1,4 +1,4 @@
-# Copyright 2023-2025 Geoffrey R. Scheller
+# Copyright 2023-2026 Geoffrey R. Scheller
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,14 @@ Gadgets
     - Self-contained with minimal dependencies.
     - No pythonic_fp dependencies.
 
+========= ============================ ============================================================
+class     module                       description
+========= ============================ ============================================================
+**Box**   **pythonic_fp.gadgets.box**  Container holding at most one item of a given type.
+**Wrap**  **pythonic_fp.gadgets.wrap** Immutablely wrap exactly one value of a given type.
+**HWrap** **pythonic_fp.gadgets.wrap** Immutablely wrap exactly one hashable value of a given type.
+========= ============================ ============================================================
+
 """
 
 from collections.abc import Iterator
@@ -31,7 +39,7 @@ from inspect import getmro
 __all__ = ['first_common_ancestor', 'iterate_over_arguments']
 
 __author__ = 'Geoffrey R. Scheller'
-__copyright__ = 'Copyright (c) 2023-2025 Geoffrey R. Scheller'
+__copyright__ = 'Copyright (c) 2023-2026 Geoffrey R. Scheller'
 __license__ = 'Apache License 2.0'
 
 
@@ -52,7 +60,7 @@ def first_common_ancestor(cls1: type, cls2: type) -> type:
 
     :param cls1: A class in the inheritance hierarchy.
     :param cls2: A class in the inheritance hierarchy.
-    :returns: First common ancestor based on getmro order.
+    :returns: First common ancestor based on ``getmro`` order.
     :raises TypeError: Raised when no common ancestor or not
                        caught when raised by ``inspect.getmro``.
 

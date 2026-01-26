@@ -1,4 +1,4 @@
-# Copyright 2023-2025 Geoffrey R. Scheller
+# Copyright 2023-2026 Geoffrey R. Scheller
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -49,6 +49,7 @@ class Wrap[T]():
         :returns: ``True`` if ``other`` is of type Wrap and wraps
                   an object which compares as equal to the wrapped
                   object, otherwise ``False``.
+
         """
         if not isinstance(other, type(self)):
             return False
@@ -115,6 +116,7 @@ class HWrap[T: Hashable](Hashable):
         :returns: ``True`` if ``other`` is of type HWrap and wraps
                   an object which compares as equal to the wrapped
                   object, otherwise ``False``.
+
         """
         if not isinstance(other, type(self)):
             return False

@@ -1,4 +1,4 @@
-# Copyright 2023-2025 Geoffrey R. Scheller
+# Copyright 2023-2026 Geoffrey R. Scheller
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,6 +11,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
+..admonition:: Container holding at most one item of a given type.
+
+    - ``Box(item: T)``: contains at one item of type ``T``
+    - ``Box[T]()``: creates empty container
+
+    Where type ``T`` is some definite type, which
+    could be ``None`` or even ``Never``.
+
+    .. tip ::
+
+        ``Box`` objects can be used in Python match statements.
+
+"""
 
 __all__ = ['Box']
 
@@ -22,21 +36,6 @@ _sentinel: Final[_Sentinel] = object()
 
 
 class Box[T]:
-    """Container holding at most one item of a given type.
-
-    .. note::
-
-       - ``Box(item: T)``: contains at one item of type ``T``
-       - ``Box[T]()``: creates empty container
-
-       Where type ``T`` is some definite type, which
-       could be ``None`` or even ``Never``.
-
-    .. tip ::
-
-       ``Box`` objects can be used in Python match statements.
-
-    """
     __slots__ = ('_item',)
     __match_args__ = ('_item',)
 
@@ -49,6 +48,7 @@ class Box[T]:
         """
         :param item: An optional initial contained ``item``
                      for the ``Box``.
+
         """
         self._item = item
 
@@ -75,6 +75,7 @@ class Box[T]:
         :returns: ``True`` if ``other`` is of type Box and contains
                   an object which compares as equal to the object
                   contained in the ``Box``, otherwise ``False``.
+
         """
         if not isinstance(other, type(self)):
             return False
@@ -94,7 +95,7 @@ class Box[T]:
         """Return the contained item, if it exists, otherwise
         an alternate item, if given.
 
-        :param alt: An optional item of type ``T`` to return 
+        :param alt: An optional item of type ``T`` to return
                     if the ``Box`` is empty.
         :returns: Contents of ``Box`` or an alternate item, if given,
                   when the ``Box`` is empty.
@@ -147,6 +148,7 @@ class Box[T]:
         :param ``new_item``: New item to exchange for current item.
         :returns: Original contents of the ``Box``.
         :raises ValueError: If Box is empty.
+
         """
         if self._item is _sentinel:
             msg = 'Box: Trying to exchange items from an empty Box'
