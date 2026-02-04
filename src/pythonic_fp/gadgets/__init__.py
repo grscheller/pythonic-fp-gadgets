@@ -23,13 +23,13 @@ Gadgets
     - Self-contained with minimal dependencies.
     - No pythonic_fp dependencies.
 
-========= ============================ ============================================================
-class     module                       description
-========= ============================ ============================================================
-**Box**   **pythonic_fp.gadgets.box**  Container holding at most one item of a given type.
-**Wrap**  **pythonic_fp.gadgets.wrap** Immutablely wrap exactly one value of a given type.
-**HWrap** **pythonic_fp.gadgets.wrap** Immutablely wrap exactly one hashable value of a given type.
-========= ============================ ============================================================
+    ========= ============================ ============================================================
+    class     module                       description
+    ========= ============================ ============================================================
+    **Box**   **pythonic_fp.gadgets.box**  Container holding at most one item of a given type.
+    **Wrap**  **pythonic_fp.gadgets.wrap** Immutablely wrap exactly one value of a given type.
+    **HWrap** **pythonic_fp.gadgets.wrap** Immutablely wrap exactly one hashable value of a given type.
+    ========= ============================ ============================================================
 
 """
 
