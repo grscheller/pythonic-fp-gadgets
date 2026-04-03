@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-..admonition:: Container holding at most one item of a given type.
+.. admonition:: Container holding at most one item of a given type.
 
     - ``Box(item: T)``: contains at one item of type ``T``
     - ``Box[T]()``: creates empty container
