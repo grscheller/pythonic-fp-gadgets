@@ -1,13 +1,13 @@
-pythonic-fp-circulararray
--------------------------
+pythonic-fp-gadgets
+-------------------
 
 Project
-`pythonic-fp-circulararray <https://pypi.org/project/pythonic-fp-circulararray/>`_
+`pythonic-fp-gadgets <https://pypi.org/project/pythonic-fp-gadgets/>`_
 one of the
 `Pythonic FP <https://grscheller.github.io/pythonic-fp/>`_
 PyPI projects.
 
-**Proposed PyPI 6.0.3 release**
+**Proposed PyPI 4.0.3 release**
 
 .. toctree::
     :caption: Overview
