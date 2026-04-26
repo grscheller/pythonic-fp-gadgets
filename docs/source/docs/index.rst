@@ -3,6 +3,7 @@ Gadgets
 
 .. automodule:: pythonic_fp.gadgets
     :synopsis:
+    :no-members:
 
 .. toctree::
     :caption: functions
