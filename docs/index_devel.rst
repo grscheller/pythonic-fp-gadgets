@@ -1,5 +1,5 @@
 pythonic-fp-gadgets
--------------------
+===================
 
 Project
 `pythonic-fp-gadgets <https://pypi.org/project/pythonic-fp-gadgets/>`_
