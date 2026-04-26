@@ -20,7 +20,7 @@
     Where type ``T`` is some definite type, which
     could be ``None`` or even ``Never``.
 
-    .. tip ::
+    .. tip::
 
         ``Box`` objects can be used in Python match statements.
 
@@ -46,8 +46,7 @@ class Box[T]:
 
     def __init__(self, item: T | _Sentinel = _sentinel) -> None:
         """
-        :param item: An optional initial contained ``item``
-                     for the ``Box``.
+        :param item: An optional initial ``item`` for the ``Box``.
 
         """
         self._item = item
@@ -69,7 +68,9 @@ class Box[T]:
 
     def __eq__(self, other: object) -> bool:
         """
-        Efficiently compare to another object.
+        .. admonition:: Equality comparison
+
+            Efficiently compare ``Box`` to another object.
 
         :param other: The object to be compared with,
         :returns: ``True`` if ``other`` is of type Box and contains
@@ -92,8 +93,11 @@ class Box[T]:
     def get(self, alt: T) -> T: ...
 
     def get(self, alt: T | _Sentinel = _sentinel) -> T:
-        """Return the contained item, if it exists, otherwise
-        an alternate item, if given.
+        """
+        .. admonition:: Get reference to boxed item
+
+            Return the boxed item, if it exists, otherwise
+            an alternate item, if given.
 
         :param alt: An optional item of type ``T`` to return
                     if the ``Box`` is empty.
@@ -111,7 +115,10 @@ class Box[T]:
         return cast(T, alt)
 
     def pop(self) -> T:
-        """Pop the contained item if ``Box`` is not empty.
+        """
+        .. admonition:: Pop item from Box
+
+            Pop the boxed item if ``Box`` is not empty.
 
         :returns: The item contained in the ``Box``.
         :raises ValueError: If Box is empty.
@@ -125,7 +132,10 @@ class Box[T]:
         return popped
 
     def push(self, item: T) -> None:
-        """Push an item into an empty ``Box``.
+        """
+        .. admonition:: Push ``item`` into ``Box``
+
+            Push an item into ``Box`` if empty.
 
         :param item: Item to push into the empty ``Box``.
         :raises ValueError: If ``Box`` is not empty.
@@ -143,7 +153,10 @@ class Box[T]:
         self._item = item
 
     def exchange(self, new_item: T) -> T:
-        """Exchange an item with what is in the Box.
+        """
+        .. admonition:: Exchange items.
+
+            Exchange an item with what is in the Box.
 
         :param ``new_item``: New item to exchange for current item.
         :returns: Original contents of the ``Box``.
@@ -158,8 +171,11 @@ class Box[T]:
         return popped
 
     def map[U](self, f: Callable[[T], U]) -> 'Box[U]':
-        """Map function ``f`` over contents. We need to return a new
-        instance since the type of Box can change.
+        """
+        .. admonition:: Map
+
+            Map function ``f`` over contents. We need to return a new
+            instance since the type of Box can change.
 
         :param f: Mapping function.
         :returns: A new instance.
@@ -170,7 +186,10 @@ class Box[T]:
         return Box(f(cast(T, self._item)))
 
     def bind[U](self, f: Callable[[T], 'Box[U]']) -> 'Box[U]':
-        """Flatmap ``Box`` with function ``f``.
+        """
+        .. admonition:: Bind
+
+            Flatmap ``Box`` with function ``f``.
 
         :param f: Binding function.
         :returns: A new instance.

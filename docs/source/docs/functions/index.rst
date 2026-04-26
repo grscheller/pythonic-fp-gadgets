@@ -1,8 +1,6 @@
 functions
 =========
 
-**Module's top level functions.**
-
 .. toctree::
     :caption: Functions
 

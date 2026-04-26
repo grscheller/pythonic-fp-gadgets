@@ -21,7 +21,7 @@ Gadgets
     - Functions and classes which could go multiple places or have
       no good place to go.
     - Self-contained with minimal dependencies.
-    - No pythonic_fp dependencies.
+    - No pythonic_fp dependencies at all.
 
 """
 
@@ -36,8 +36,11 @@ __license__ = 'Apache License 2.0'
 
 
 def first_common_ancestor(cls1: type, cls2: type) -> type:
-    """Find the least upper bound in the inheritance graph
-    of two classes.
+    """
+    .. admonition:: Least upper bound
+
+        Find the least upper bound in the inheritance graph
+        of two classes.
 
     .. warning::
 
@@ -53,8 +56,8 @@ def first_common_ancestor(cls1: type, cls2: type) -> type:
     :param cls1: A class in the inheritance hierarchy.
     :param cls2: A class in the inheritance hierarchy.
     :returns: First common ancestor based on ``getmro`` order.
-    :raises TypeError: Raised when no common ancestor or not
-                       caught when raised by ``inspect.getmro``.
+    :raises TypeError: Raised when no common ancestor exists, or when
+                       not caught when raised by ``inspect.getmro``.
 
     """
     if issubclass(cls1, cls2):
@@ -69,14 +72,14 @@ def first_common_ancestor(cls1: type, cls2: type) -> type:
 
 
 def iterate_over_arguments[A](*args: A) -> Iterator[A]:
-    """Function returning an iterator of its arguments.
+    """
+    .. admonition:: Iterate over arguments.
+
+        Function returning an iterator over its arguments.
 
     .. note::
 
-        Does not create an object to iterate over.
-
-        - well, not in the Python world
-        - maybe in the C world
+        Does not create a Python object to iterate over.
 
     :param args: Objects to iterate over.
     :returns: An iterator of the functions arguments.

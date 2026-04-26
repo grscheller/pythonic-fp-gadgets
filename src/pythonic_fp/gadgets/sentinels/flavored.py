@@ -1,4 +1,4 @@
-# Copyright 2023-2025 Geoffrey R. Scheller
+# Copyright 2023-2026 Geoffrey R. Scheller
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,25 +13,26 @@
 # limitations under the License.
 
 """
-.. admonition:: Sentinel values labeled by different (hashable) flavors.
+.. admonition:: When different flavors of the truth are needed.
 
-    When different flavors of the truth are needed.
+    Sentinel values labeled by different (hashable) flavors.
+    Threadsafe.
 
-.. note::
+.. tip::
 
     Can be compared using ``==`` and ``!=``. A flavored sentinel
     value always equals itself and never equals anything else,
     especially other flavored sentinel values.
 
+.. tip::
+
     Useful for union types where ``Sentinel[H]`` is one of the
     types making up the union.
 
+.. tip::
+
     To ensure that reference equality is used, put the known
     sentinel value first in the comparison.
-
-.. note::
-
-    Threadsafe.
 
 """
 
@@ -60,6 +61,7 @@ class Sentinel[H: Hashable]:
         :param flavor: Some Hashable value of generic type ``H``.
         :returns: The ``Sentinel`` singleton instance with flavor ``flavor``.
         :rtype: ``Sentinel[H]`` where ``H`` is a subtype of Hashable.
+
         """
         if not hasattr(self, '_flavor'):
             self._flavor = flavor
@@ -69,6 +71,12 @@ class Sentinel[H: Hashable]:
 
     def flavor(self) -> H:
         """
-        :returns: The sentinel's flavor. A ``Hashable`` value of type ``H``.
+        .. admonition:: Get flavor
+
+            Get the sentinel's flavor, a hashable
+            value of type ``H``.
+
+        :returns: The sentinel's flavor.
+
         """
         return self._flavor

@@ -1,4 +1,4 @@
-# Copyright 2023-2025 Geoffrey R. Scheller
+# Copyright 2023-2026 Geoffrey R. Scheller
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,8 +13,10 @@
 # limitations under the License.
 
 """
-.. admonition:: Singleton class representing an actually,
-                not potentially, missing value.
+.. admonition:: Missing value.
+
+    Singleton class representing an actually,
+    not potentially, missing value.
 
     ``NoValue()`` is a singleton object representing a missing value.
 
@@ -100,6 +102,7 @@ class NoValue():
     def __new__(cls) -> 'NoValue':
         """
         :returns: The ``NoValue`` singleton instance.
+
         """
         if cls._instance is None:
             with cls._lock:
@@ -113,11 +116,13 @@ class NoValue():
     def __eq__(self, other: object) -> bool:
         """
         :returns: ``False``
+
         """
         return False
 
     def __ne__(self, other: object) -> bool:
         """
         :returns: ``False``
+
         """
         return False
