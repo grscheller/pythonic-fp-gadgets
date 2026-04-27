@@ -12,7 +12,7 @@ from sphinx.application import Sphinx
 project = 'Pythonic FP - Gadgets'
 copyright = '2023-2026, Geoffrey R. Scheller'
 author = 'Geoffrey R. Scheller'
-release = '4.0.3'
+release = '4.0.4'
 
 
 def skip_abc_methods(
@@ -37,15 +37,8 @@ extensions = [
     'sphinx.ext.graphviz',
 ]
 
-autodoc_default_options = {
-    'members': True,
-    'private-members': True,
-    'special-members': True,
-    'inherited-members': True,
-    'show-inheritance': True,
-}
 autodoc_member_order = 'bysource'
-autoclass_content = 'both'
+autoclass_content = 'class'
 autodoc_class_signature = 'separated'
 autodoc_typehints_format = 'short'
 autodoc_use_type_comments = True

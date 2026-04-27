@@ -17,6 +17,14 @@ See `Semantic Versioning 2.0.0 <https://semver.org>`_.
 Releases and Important Milestones
 ---------------------------------
 
+PyPI 4.0.3 - 2026-04-26
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Redoing docs based on circulararray and booleans.
+
+- made some innovations which I will back port to the above two.
+
+
 PyPI 4.0.2 - 2026-01-08
 ~~~~~~~~~~~~~~~~~~~~~~~
 

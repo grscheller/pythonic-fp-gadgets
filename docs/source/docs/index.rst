@@ -2,8 +2,9 @@ Gadgets
 =======
 
 .. automodule:: pythonic_fp.gadgets
-    :synopsis:
     :no-members:
+    :ignore-module-all:
+    :no-index:
 
 .. toctree::
     :caption: functions

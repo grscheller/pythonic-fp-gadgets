@@ -12,17 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-.. admonition:: Container holding at most one item of a given type.
+.. admonition:: Module box
 
-    - ``Box(item: T)``: contains at one item of type ``T``
-    - ``Box[T]()``: creates empty container
-
-    Where type ``T`` is some definite type, which
-    could be ``None`` or even ``Never``.
+    Containers holding at most one item of a given type.
 
     .. tip::
 
-        ``Box`` objects can be used in Python match statements.
+        Objects of the ``Box`` type
+
+        - Are truthy if not empty.
+        - Can be combined with other iterators before being filled.
+        - Can be used like a promise.
+        - Threadsafe
+        - Can be used in Python match statements.
 
 """
 
@@ -36,6 +38,12 @@ _sentinel: Final[_Sentinel] = object()
 
 
 class Box[T]:
+    """
+    .. admonition:: Box
+
+        Container holding at most one item of a given type.
+
+    """
     __slots__ = ('_item',)
     __match_args__ = ('_item',)
 
@@ -94,7 +102,7 @@ class Box[T]:
 
     def get(self, alt: T | _Sentinel = _sentinel) -> T:
         """
-        .. admonition:: Get reference to boxed item
+        .. admonition:: Get
 
             Return the boxed item, if it exists, otherwise
             an alternate item, if given.
@@ -116,9 +124,9 @@ class Box[T]:
 
     def pop(self) -> T:
         """
-        .. admonition:: Pop item from Box
+        .. admonition:: Pop
 
-            Pop the boxed item if ``Box`` is not empty.
+            Pop item from ``Box`` if not empty.
 
         :returns: The item contained in the ``Box``.
         :raises ValueError: If Box is empty.
@@ -133,7 +141,7 @@ class Box[T]:
 
     def push(self, item: T) -> None:
         """
-        .. admonition:: Push ``item`` into ``Box``
+        .. admonition:: Push
 
             Push an item into ``Box`` if empty.
 
@@ -149,12 +157,17 @@ class Box[T]:
         return None
 
     def put(self, item: T) -> None:
-        """Put an item in the Box. Discard any previous contents."""
+        """
+        .. admonition:: Put
+
+            Put an item in the Box. Discard any previous contents.
+
+        """
         self._item = item
 
     def exchange(self, new_item: T) -> T:
         """
-        .. admonition:: Exchange items.
+        .. admonition:: Exchange
 
             Exchange an item with what is in the Box.
 
@@ -178,7 +191,7 @@ class Box[T]:
             instance since the type of Box can change.
 
         :param f: Mapping function.
-        :returns: A new instance.
+        :returns: New instance.
 
         """
         if self._item is _sentinel:
@@ -192,7 +205,7 @@ class Box[T]:
             Flatmap ``Box`` with function ``f``.
 
         :param f: Binding function.
-        :returns: A new instance.
+        :returns: New instance.
 
         """
         if self._item is _sentinel:
