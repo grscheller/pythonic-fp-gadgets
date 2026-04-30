@@ -12,30 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
-.. admonition:: When different flavors of the truth are needed.
-
-    Sentinel values labeled by different (hashable) flavors.
-    Threadsafe.
-
-.. tip::
-
-    Can be compared using ``==`` and ``!=``. A flavored sentinel
-    value always equals itself and never equals anything else,
-    especially other flavored sentinel values.
-
-.. tip::
-
-    Useful for union types where ``Sentinel[H]`` is one of the
-    types making up the union.
-
-.. tip::
-
-    To ensure that reference equality is used, put the known
-    sentinel value first in the comparison.
-
-"""
-
 import threading
 from typing import ClassVar, final, Hashable
 
@@ -44,6 +20,24 @@ __all__ = ['Sentinel']
 
 @final
 class Sentinel[H: Hashable]:
+    """
+    .. admonition:: Sentinel
+
+        Sentinel values labeled by different (hashable) flavors.
+        Useful when different flavors of the truth are needed.
+
+        .. tip::
+
+            - Can be compared using ``==`` and ``!=``. A flavored sentinel
+              value always equals itself and never equals anything else,
+              especially other flavored sentinel values.
+            - Useful for union types where ``Sentinel[H]`` is one of the
+              types making up the union.
+            - To ensure that reference equality is used, put the known
+              sentinel value first in the comparison.
+
+    """
+
     __slots__ = ('_flavor',)
 
     _flavors: 'dict[H, Sentinel[H]]' = {}

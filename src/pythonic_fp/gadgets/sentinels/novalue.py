@@ -12,80 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
-.. admonition:: Missing value.
-
-    Singleton class representing an actually,
-    not potentially, missing value.
-
-    ``NoValue()`` is a singleton object representing a missing value.
-
-    While ``None`` and ``()`` are frequently used as sentinel values,
-    I prefer to think of them as
-
-    - ``None``: Returns, or returned, no values.
-    - ``()``: An empty, possibly typed, iterable collection.
-
-.. important::
-
-    Given variables
-
-    .. code:: python
-
-        x: int | NoValue
-        y: int | NoValue
-
-    Equality between ``x`` and ``y`` means both values exist and compare
-    as equal. If one or both of theses values are missing, then what is
-    there to compare?
-
-    .. table:: ``x == y``
-
-        +-----------+-----------+--------+--------+
-        |    x∖y    | NoValue() | 42     | 57     |
-        +===========+===========+========+========+
-        | NoValue() | false     | false  | false  |
-        +-----------+-----------+--------+--------+
-        | 42        | false     | true   | false  |
-        +-----------+-----------+--------+--------+
-        | 57        | false     | false  | true   |
-        +-----------+-----------+--------+--------+
-
-    Similarly for not equals.
-
-    .. table:: ``x != y``:wq
-
-        +-----------+-----------+--------+--------+
-        |    x∖y    | NoValue() | 42     | 57     |
-        +===========+===========+========+========+
-        | NoValue() | false     | false  | false  |
-        +-----------+-----------+--------+--------+
-        | 42        | false     | false  | true   |
-        +-----------+-----------+--------+--------+
-        | 57        | false     | true   | false  |
-        +-----------+-----------+--------+--------+
-
-.. warning::
-
-    Only use ``==`` or ``!=`` in value comparisons. To directly
-    identity the ``NoValue`` singleton, use ``is`` and ``is not``
-    instead.
-
-.. note::
-
-    Threadsafe.
-
-.. tip::
-
-    Use as a hidden implementation detail when creating "optional"
-    arguments to functions and methods.
-
-    To help ensure the abstraction does not leak,
-
-    - Do not export the sentinel value.
-    - Use ``@overload`` to keep the NoValue type out of documentation and IDEs.
- 
-"""
 import threading
 from typing import ClassVar, final
 
@@ -93,7 +19,78 @@ __all__ = ['NoValue']
 
 
 @final
-class NoValue():
+class NoValue:
+    """
+    .. admonition:: Missing value
+
+        Singleton class representing an actual, not
+        potential, missing value.
+
+        ``NoValue()`` is a singleton object representing a missing value.
+
+        While ``None`` and ``()`` are frequently used as sentinel values,
+        I prefer to think of them as
+
+        - ``None``: Returns, or returned, no values.
+        - ``()``: An empty, possibly typed, iterable collection.
+
+        .. tip::
+
+            Use as a hidden implementation detail when creating "optional"
+            arguments to functions and methods.
+
+            To help ensure the abstraction does not leak,
+
+            - Do not export the sentinel value.
+            - Use ``@overload`` to keep the NoValue type out of documentation and IDEs.
+
+        .. warning::
+
+            Only use ``==`` or ``!=`` in value comparisons. To directly
+            identity the ``NoValue`` singleton, use ``is`` and ``is not``
+            instead.
+
+        .. important::
+
+            Given variables
+
+            .. code:: python
+
+                x: int | NoValue
+                y: int | NoValue
+
+            Equality between ``x`` and ``y`` means both values exist and compare
+            as equal. If one or both of theses values are missing, then what is
+            there to compare?
+
+            .. table:: ``x == y``
+
+                +-----------+-----------+--------+--------+
+                |    x∖y    | NoValue() | 42     | 57     |
+                +===========+===========+========+========+
+                | NoValue() | false     | false  | false  |
+                +-----------+-----------+--------+--------+
+                | 42        | false     | true   | false  |
+                +-----------+-----------+--------+--------+
+                | 57        | false     | false  | true   |
+                +-----------+-----------+--------+--------+
+
+            Similarly for not equals.
+
+            .. table:: ``x != y``
+
+                +-----------+-----------+--------+--------+
+                |    x∖y    | NoValue() | 42     | 57     |
+                +===========+===========+========+========+
+                | NoValue() | false     | false  | false  |
+                +-----------+-----------+--------+--------+
+                | 42        | false     | false  | true   |
+                +-----------+-----------+--------+--------+
+                | 57        | false     | true   | false  |
+                +-----------+-----------+--------+--------+
+
+    """
+
     __slots__ = ()
 
     _instance: 'ClassVar[NoValue | None]' = None
@@ -115,7 +112,24 @@ class NoValue():
 
     def __eq__(self, other: object) -> bool:
         """
-        :returns: ``False``
+        .. admonition:: Equality comparison
+
+            Efficiently compare ``CA`` to another object.
+
+            .. warning::
+
+                Non-standard comparison semantics. Always returns
+                ``False``. If one or both values are missing, then
+                what is there to compare?
+
+                .. tip::
+
+                    If used in a union type as a sentinel value,
+                    use ``is`` to determine if it was passed as
+                    an argument.
+
+        :param other: The object to be compared.
+        :returns: ``False`` even if compared to itself.
 
         """
         return False

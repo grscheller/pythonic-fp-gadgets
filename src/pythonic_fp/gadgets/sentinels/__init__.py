@@ -12,6 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__author__ = 'Geoffrey R. Scheller'
-__copyright__ = 'Copyright (c) 2023-2026 Geoffrey R. Scheller'
-__license__ = 'Apache License 2.0'
+"""
+sentinels
+---------
+
+.. admonition:: Sentinel values
+
+    - Singletons
+    - Threadsafe
+    - Useful for both
+
+      - referenced objects
+      - hidden implementation details
+
+"""
