@@ -11,22 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""
-.. admonition:: Module box
-
-    Containers holding at most one item of a given type.
-
-    .. tip::
-
-        Objects of the ``Box`` type
-
-        - Are truthy if not empty.
-        - Can be combined with other iterators before being filled.
-        - Can be used like a promise.
-        - Threadsafe
-        - Can be used in Python match statements.
-
-"""
 
 __all__ = ['Box']
 
@@ -42,6 +26,16 @@ class Box[T]:
     .. admonition:: Box
 
         Container holding at most one item of a given type.
+
+        .. tip::
+
+            Objects of the ``Box`` type
+
+            - Are truthy if not empty.
+            - Can be combined with other iterators before being filled.
+            - Can be used like a promise.
+            - Threadsafe
+            - Can be used in Python match statements.
 
     """
     __slots__ = ('_item',)
@@ -80,8 +74,8 @@ class Box[T]:
 
             Efficiently compare ``Box`` to another object.
 
-        :param other: The object to be compared with,
-        :returns: ``True`` if ``other`` is of type Box and contains
+        :param other: The object to be compared.
+        :returns: ``True`` if ``other`` is another ``Box`` and contains
                   an object which compares as equal to the object
                   contained in the ``Box``, otherwise ``False``.
 

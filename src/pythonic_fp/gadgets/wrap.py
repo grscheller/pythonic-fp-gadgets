@@ -30,7 +30,9 @@ class Wrap[T]():
     """
     .. admonition:: Wrap object
 
-        Immutablely wrap exactly one value of a given type.
+        Immutablely wrap exactly one value of a
+        given type. ``Wrap`` objects can be used
+        in Python match statements.
 
     """
     __slots__ = ('_item',)
@@ -115,17 +117,16 @@ class HWrap[T: Hashable](Hashable):
     """
     .. admonition:: Wrap hashable object
 
-        Immutablely wrap exactly one value of a given hashable type.
+        Immutablely wrap exactly one value of a
+        given hashable type. ``HWrap`` objects can
+        be used in Python match statements.
 
-    .. tip::
+        .. tip::
 
-        ``HWrap`` objects can be used in Python match statements.
-
-    .. tip::
-
-        ``HWrap`` objects are hashable.
+            ``HWrap`` objects are hashable.
 
     """
+
     __slots__ = ('_item', '_hash')
     __match_args__ = ('_item',)
 
