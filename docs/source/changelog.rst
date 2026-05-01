@@ -1,4 +1,4 @@
-changelog
+Changelog
 =========
 
 Changelog for the
