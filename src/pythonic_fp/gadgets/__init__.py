@@ -42,16 +42,16 @@ def first_common_ancestor(cls1: type, cls2: type) -> type:
         Find the least upper bound in the inheritance graph
         of two classes.
 
-    .. warning::
+        .. warning::
 
-        This function can fail with a TypeError. Some error messages
-        seen are
+            This function can fail with a TypeError. Some error messages
+            seen are
 
-        - multiple bases have instance lay-out conflict
-        - type 'bool' is not an acceptable base type
+            - multiple bases have instance lay-out conflict
+            - type 'bool' is not an acceptable base type
 
-        This happens frequently when the function is given
-        Python builtin types or in multiple inheritance situations.
+            This happens frequently when the function is given
+            Python builtin types or in multiple inheritance situations.
 
     :param cls1: A class in the inheritance hierarchy.
     :param cls2: A class in the inheritance hierarchy.
@@ -77,9 +77,9 @@ def iterate_over_arguments[A](*args: A) -> Iterator[A]:
 
         Function returning an iterator over its arguments.
 
-    .. note::
+        .. note::
 
-        Does not create a Python object to iterate over.
+            Does not create a Python object to iterate over.
 
     :param args: Objects to iterate over.
     :returns: An iterator of the functions arguments.
