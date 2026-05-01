@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__all__ = ['Box']
-
 from collections.abc import Callable, Iterator
 from typing import cast, Final, overload
+
+__all__ = ['Box']
 
 type _Sentinel = object
 _sentinel: Final[_Sentinel] = object()

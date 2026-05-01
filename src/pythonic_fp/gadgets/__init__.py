@@ -14,7 +14,7 @@
 
 """
 Gadgets
--------
+=======
 
 .. admonition:: Collection of mostly self-contained functions and classes
 
