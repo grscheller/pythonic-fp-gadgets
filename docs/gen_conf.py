@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Generate conf.py Sphinxconfiguration executable
+# Generate conf.py Sphinx configuration executable
 
 import sys
 import os
@@ -21,7 +21,7 @@ else:
 
 match build_type:
     case 'custom':
-        release = '0.0.0'
+        release = f'{custom_version}'
         release_string = f'**Custom PyPI Non-release version {release}**'
     case 'devel':
         release = f'{devel_version}'
