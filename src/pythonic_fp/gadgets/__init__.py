@@ -21,7 +21,8 @@ Gadgets
     - Functions and classes which could go multiple places or have
       no good place to go.
     - Self-contained with minimal dependencies.
-    - No pythonic_fp dependencies at all.
+
+      - No pythonic_fp dependencies at all.
 
 """
 

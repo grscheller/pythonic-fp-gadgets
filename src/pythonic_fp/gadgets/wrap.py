@@ -40,6 +40,10 @@ class Wrap[T]():
 
     def __init__(self, item: T) -> None:
         """
+        .. admonition:: Initializer
+
+            Initialize ``Wrap`` with 1 required item.
+
         :param item: Item to be wrapped.
 
         """
@@ -64,8 +68,18 @@ class Wrap[T]():
         if self:
             yield self._item
 
-    def __repr__(self) -> str:
-        return 'Wrap(' + repr(self._item) + ')'
+    def __str__(self) -> str:
+        """
+        .. admonition:: User string
+
+            Construct string 'Box(item_str)'
+            where ``item_str = str(item)`` for the currently contained
+            item. 
+
+        :returns: A string to reproduce the current state of the ``Box``. 
+
+        """
+        return 'Wrap(' + str(self._item) + ')'
 
     def __eq__(self, other: object) -> bool:
         """

@@ -34,8 +34,8 @@ class Box[T]:
             - Are truthy if not empty.
             - Can be combined with other iterators before being filled.
             - Can be used like a promise.
-            - Threadsafe
             - Can be used in Python match statements.
+            - Threadsafe
 
     """
     __slots__ = ('_item',)
@@ -48,24 +48,44 @@ class Box[T]:
 
     def __init__(self, item: T | _Sentinel = _sentinel) -> None:
         """
+        .. admonition:: Initializer
+
+            Initialize ``Box`` with 0 or 1 items.
+
         :param item: An optional initial ``item`` for the ``Box``.
 
         """
         self._item = item
 
     def __bool__(self) -> bool:
+        """
+        .. admonition:: Bool
+
+            Truthy if not empty.
+
+        """
         return self._item is not _sentinel
 
     def __iter__(self) -> Iterator[T]:
+        """
+        .. admonition:: Iterability
+
+            Iterates boxed item.
+
+        """
         if self:
             yield cast(T, self._item)
 
-    def __repr__(self) -> str:
-        if self:
-            return 'Box(' + repr(self._item) + ')'
-        return 'Box()'
-
     def __len__(self) -> int:
+        """
+        .. admonition:: Length
+
+            - 1 if ``Box`` contains an item
+            - 0 if ``Box`` is empty
+
+        :returns: The number of items currently in the ``Box``.
+
+        """
         return 1 if self else 0
 
     def __eq__(self, other: object) -> bool:
@@ -88,6 +108,21 @@ class Box[T]:
         if self._item == other._item:
             return True
         return False
+
+    def __repr__(self) -> str:
+        """
+        .. admonition:: Representation string
+
+            Construct string 'Box()' if empty, otherwise 'Box(item_repr)'
+            where ``item_repr = repr(item)`` for the currently contained
+            item. 
+
+        :returns: A string to reproduce the current state of the ``Box``. 
+
+        """
+        if self:
+            return 'Box(' + repr(self._item) + ')'
+        return 'Box()'
 
     @overload
     def get(self) -> T: ...
