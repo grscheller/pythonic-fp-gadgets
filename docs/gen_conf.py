@@ -4,7 +4,8 @@
 import sys
 import os
 
-project = 'Pythonic FP - Gadgets'
+project_prefix = 'Pythonic FP'
+pypi_prefix = 'pythonic-fp'
 author = 'Geoffrey R. Scheller'
 copyright = f'2023-2026, {author}'
 
@@ -12,22 +13,24 @@ args = sys.argv[1:]
 num_args = len(args)
 
 if num_args == 4:
-    build_type, release_version, devel_version, custom_version = args
-elif num_args == 1:
-    build_type = args[0]
-else:
-    sys.exit('Error: gen_conf.py takes either 1 or 4 arguments')
+    build_type, version, project_name, pypi_name = args
+    project = project_prefix + ' - ' + project_name
+    pypi_project_repo = pypi_prefix + '-' + pypi_name
+    project_url_rst = f'`{project} <https://pypi.org/project/{pypi_project_repo}/>`_'
+    homepage_url_rst = f'`{project_prefix} <https://grscheller.github.io/{pypi_prefix}/>`_'
 
+else:
+    sys.exit('Error: gen_conf.py takes exactly 4 arguments')
 
 match build_type:
     case 'custom':
-        release = f'{custom_version}'
+        release = f'{version}'
         release_string = f'**Custom PyPI Non-release version {release}**'
     case 'devel':
-        release = f'{devel_version}'
+        release = f'{version}'
         release_string = f'**Proposed PyPI release version {release}**'
     case 'release':
-        release = f'{release_version}'
+        release = f'{version}'
         release_string = f'**PyPI release version {release}**'
     case 'redo':
         if not os.path.isfile('source/conf.py'):
@@ -36,17 +39,16 @@ match build_type:
     case _:
         sys.exit(f'Error: unknown built_type {build_type} given')
 
-conf_py = f'''# Generated conf.py Sphinx configuration executable
+print(f'''# Generated conf.py Sphinx configuration executable
 
 from typing import Any
 from sphinx.application import Sphinx
 
 project = '{project}'
 author = '{author}'
-copyright = '2023-2026, {author}'
+copyright = '{copyright}'
 release = '{release}'
 release_string = '{release_string}'
-
 
 def skip_abc_methods(
     app: Any, what: str, name: str, obj: Any, skip: bool, options: Any
@@ -78,7 +80,7 @@ autodoc_default_options = {{
     'show-inheritance': True,
 }}
 autodoc_member_order = 'bysource'
-autoclass_content = 'both'
+autoclass_content = 'class'
 autodoc_class_signature = 'separated'
 autodoc_typehints_format = 'short'
 autodoc_use_type_comments = True
@@ -101,11 +103,7 @@ html_theme = 'furo'
 html_static_path = ['_static']
 
 rst_epilog = """
-.. |VERSION_RELEASED| replace:: version {release}
-
 .. |RELEASE_STRING| replace:: {release_string}
 
 """
-'''
-
-print(conf_py)
+''')

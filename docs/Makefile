@@ -3,9 +3,11 @@
 # Last and future releases
 #  - former needs to agree with PyPI
 #  - later needs to agree with pyproject.toml
-PYPI_RELEASE_VERSION ?= 4.0.3
-PYPI_DEVEL_VERSION ?= 4.0.4
-PYPI_CUSTOM_VERSION ?= 0.0.0
+PROJECT_NAME = Gadgets
+PYPI_NAME = gadgets
+RELEASE_VERSION = 4.0.3
+DEVEL_VERSION = 4.0.4
+CUSTOM_VERSION = 0.0.0
 
 SPHINXOPTS ?=
 SPHINXBUILD ?= sphinx-build
@@ -14,8 +16,6 @@ BUILDDIR = build
 
 STATICDIR = source/_static
 TEMPLATEDIR = source/_templates
-VERSIONS = $(PYPI_RELEASE_VERSION) $(PYPI_DEVEL_VERSION) $(PYPI_CUSTOM_VERSION)
-
 
 # Put help first so that "make" without argument is like "make help".
 help:
@@ -38,17 +38,17 @@ clean: clean_devel clean_release clean_custom clean_source
 	@echo Removed all doc build artifacts.
 
 setup_devel: clean_devel
-	@./gen_conf.py devel $(VERSIONS) > "$(SOURCEDIR)"/conf.py
+	@./gen_conf.py devel "$(DEVEL_VERSION)" "$(PROJECT_NAME)" "$(PYPI_NAME)" > "$(SOURCEDIR)"/conf.py
 
 setup_release: clean_release
-	@./gen_conf.py release $(VERSIONS) > "$(SOURCEDIR)"/conf.py
+	@./gen_conf.py release "$(RELEASE_VERSION)" "$(PROJECT_NAME)" "$(PYPI_NAME)" > "$(SOURCEDIR)"/conf.py
 
 setup_custom: clean_custom
-	@./gen_conf.py custom $(VERSIONS) > "$(SOURCEDIR)"/conf.py
+	@./gen_conf.py custom "$(CUSTOM_VERSION)" "$(PROJECT_NAME)" "$(PYPI_NAME)" > "$(SOURCEDIR)"/conf.py
 
 setup_redo: clean_custom
 	@echo Redoing custom build with a possibly reeditted conf.py
-	@./gen_conf.py redo
+	@./gen_conf.py redo "" "" ""
 
 # Build development labeled html docs.
 devel: Makefile setup_devel

@@ -2,7 +2,7 @@ pythonic-fp-gadgets
 ===================
 
 Project
-`pythonic-fp-gadgets <https://pypi.org/project/pythonic-fp-gadgets/>`_
+`Pythonic FP - Gadgets <https://pypi.org/project/pythonic-fp-gadgets/>`_
 one of the
 `Pythonic FP <https://grscheller.github.io/pythonic-fp/>`_
 PyPI projects.
