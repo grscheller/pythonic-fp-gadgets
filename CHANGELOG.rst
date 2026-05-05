@@ -17,6 +17,12 @@ See `Semantic Versioning 2.0.0 <https://semver.org>`_.
 Releases and Important Milestones
 ---------------------------------
 
+Development Status Reappraisal - 2026-05-05
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Maintainer appraised the Development Status for
+pythonic-fp-gadgets to be ``"3 - Alpha"``.
+
 PyPI 4.0.3 - 2026-04-26
 ~~~~~~~~~~~~~~~~~~~~~~~
 
