@@ -23,18 +23,19 @@ class Sentinel[H: Hashable]:
     """
     .. admonition:: Sentinel
 
-        Sentinel values labeled by different (hashable) flavors.
-        Useful when different flavors of the truth are needed.
+        - Sentinel values labeled by different (hashable) flavors.
+        - Useful when different flavors of the truth are needed.
 
         .. tip::
 
+            - Useful for union types where some of the types making up
+              the union are ``Sentinel[H]``.
             - Can be compared using ``==`` and ``!=``. A flavored sentinel
               value always equals itself and never equals anything else,
               especially other flavored sentinel values.
-            - Useful for union types where ``Sentinel[H]`` is one of the
-              types making up the union.
-            - To ensure that reference equality is used, put the known
-              sentinel value first in the comparison.
+
+                - To ensure that reference equality is used, put the known
+                  sentinel value first in the comparison.
 
     """
 
@@ -44,6 +45,14 @@ class Sentinel[H: Hashable]:
     _lock: ClassVar[threading.Lock] = threading.Lock()
 
     def __new__(cls, flavor: H) -> 'Sentinel[H]':
+        """
+        .. admonition:: new
+
+            :param flavor: A ``Hashable`` value determining which
+                           flavored ``Sentinel`` to return.
+            :returns: The ``Sentinel(flavor)`` singleton instance.
+
+        """
         if flavor not in cls._flavors:
             with cls._lock:
                 if flavor not in cls._flavors:
@@ -52,25 +61,45 @@ class Sentinel[H: Hashable]:
 
     def __init__(self, flavor: H) -> None:
         """
-        :param flavor: Some Hashable value of generic type ``H``.
-        :returns: The ``Sentinel`` singleton instance with flavor ``flavor``.
-        :rtype: ``Sentinel[H]`` where ``H`` is a subtype of Hashable.
+        .. admonition:: init
+
+            :param flavor: A ``Hashable`` value determining which
+                           flavored ``Sentinel`` to initialize.
+            :type flavor: ``H: Hashable``
 
         """
         if not hasattr(self, '_flavor'):
             self._flavor = flavor
 
     def __repr__(self) -> str:
+        """
+        .. admonition:: repr string
+
+            Construct string 'Sentinel(flavor)' where the flavor
+            is displayed with ``repr()``.
+
+            :returns: A string to reproduce the flavored sentinel.
+
+        """
         return "Sentinel('" + repr(self._flavor) + "')"
+
+    def __str__(self) -> str:
+        """
+        .. admonition:: user string
+
+            Construct string 'Sentinel(flavor)' where the flavor
+            is displayed with ``str()``.
+
+            :returns: A string meaningful to an end user.
+
+        """
+        return "Sentinel('" + str(self._flavor) + "')"
 
     def flavor(self) -> H:
         """
-        .. admonition:: Get flavor
+        .. admonition:: get flavor
 
-            Get the sentinel's flavor, a hashable
-            value of type ``H``.
-
-        :returns: The sentinel's flavor.
+            :returns: The sentinel's flavor.
 
         """
         return self._flavor

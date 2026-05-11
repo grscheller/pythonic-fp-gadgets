@@ -8,7 +8,7 @@ sentinels
 
 .. toctree::
     :caption: Sentinel Values
+    :maxdepth: 2
 
     novalue
     flavored
-

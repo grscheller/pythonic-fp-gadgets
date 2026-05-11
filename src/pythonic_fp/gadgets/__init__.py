@@ -43,6 +43,12 @@ def first_common_ancestor(cls1: type, cls2: type) -> type:
         Find the least upper bound in the inheritance graph
         of two classes.
 
+        :param cls1: A class in the inheritance hierarchy.
+        :param cls2: A class in the inheritance hierarchy.
+        :returns: First common ancestor based on ``getmro`` order.
+        :raises TypeError: Raised when no common ancestor exists, or when
+                           not caught when raised by ``inspect.getmro``.
+
         .. warning::
 
             This function can fail with a TypeError. Some error messages
@@ -53,13 +59,6 @@ def first_common_ancestor(cls1: type, cls2: type) -> type:
 
             This happens frequently when the function is given
             Python builtin types or in multiple inheritance situations.
-
-    :param cls1: A class in the inheritance hierarchy.
-    :param cls2: A class in the inheritance hierarchy.
-    :returns: First common ancestor based on ``getmro`` order.
-    :raises TypeError: Raised when no common ancestor exists, or when
-                       not caught when raised by ``inspect.getmro``.
-
     """
     if issubclass(cls1, cls2):
         return cls2
@@ -78,12 +77,12 @@ def iterate_over_arguments[A](*args: A) -> Iterator[A]:
 
         Function returning an iterator over its arguments.
 
+        :param args: Objects to iterate over.
+        :returns: An iterator of the function's arguments.
+
         .. note::
 
             Does not create a Python object to iterate over.
-
-    :param args: Objects to iterate over.
-    :returns: An iterator of the functions arguments.
 
     """
     yield from args
