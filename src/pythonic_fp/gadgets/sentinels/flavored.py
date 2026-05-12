@@ -23,19 +23,14 @@ class Sentinel[H: Hashable]:
     """
     .. admonition:: Sentinel
 
-        - Sentinel values labeled by different (hashable) flavors.
-        - Useful when different flavors of the truth are needed.
+        Sentinel values labeled by different (hashable) flavors.
 
-        .. tip::
+        .. note::
 
-            - Useful for union types where some of the types making up
-              the union are ``Sentinel[H]``.
-            - Can be compared using ``==`` and ``!=``. A flavored sentinel
-              value always equals itself and never equals anything else,
-              especially other flavored sentinel values.
-
-                - To ensure that reference equality is used, put the known
-                  sentinel value first in the comparison.
+            - Useful for union types.
+            - A flavored ``Sentinel`` value always equals itself
+              and never equals anything else, especially other
+              flavored sentinel values.
 
     """
 
@@ -48,7 +43,7 @@ class Sentinel[H: Hashable]:
         """
         .. admonition:: new
 
-            :param flavor: A ``Hashable`` value determining which
+            :param flavor: Hashable value determining which
                            flavored ``Sentinel`` to return.
             :returns: The ``Sentinel(flavor)`` singleton instance.
 
@@ -63,8 +58,7 @@ class Sentinel[H: Hashable]:
         """
         .. admonition:: init
 
-            :param flavor: A ``Hashable`` value determining which
-                           flavored ``Sentinel`` to initialize.
+            :param flavor: Hashable value to initially cache the flavor
             :type flavor: ``H: Hashable``
 
         """
