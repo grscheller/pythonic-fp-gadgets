@@ -48,7 +48,7 @@ jobs:
       - name: Build Development Docs
         run: |
           pip install -e .
-          docs/gen_conf.py devel ${{ env.Devel }} Gadgets gadgets > docs/source/conf.py
+          docs/gen_conf.py devel ${{ env.DEVEL }} Gadgets gadgets > docs/source/conf.py
           sphinx-build -M html docs/source docs/build/development
 
       - name: Setup Pages
