@@ -11,15 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""
-.. admonition:: Module wrap
-
-    Wrap objects in ways to make them "immutable."
-
-    - Class ``Wrap``: wrap an object
-    - Class ``HWrap``: wrap a hashable object
-
-"""
 
 __all__ = ['Wrap', 'HWrap']
 
@@ -28,11 +19,13 @@ from collections.abc import Callable, Iterator, Hashable
 
 class Wrap[T]():
     """
-    .. admonition:: Wrap object
+    .. admonition:: Wrap
 
-        Immutablely wrap exactly one value of a
-        given type. ``Wrap`` objects can be used
-        in Python match statements.
+        Immutablely wrap exactly one item.
+
+        .. tip::
+
+            ``Wrap`` objects are matchable.
 
     """
     __slots__ = ('_item',)
@@ -40,57 +33,55 @@ class Wrap[T]():
 
     def __init__(self, item: T) -> None:
         """
-        .. admonition:: Initializer
+        .. admonition:: init
 
             Initialize ``Wrap`` with 1 required item.
 
-        :param item: Item to be wrapped.
+            :param item: Item to be wrapped.
 
         """
         self._item = item
 
     def __bool__(self) -> bool:
         """
-        .. admonition:: Bool
+        .. admonition:: bool
 
             Truthiness same as wrapped object.
 
         """
         return bool(self._item)
 
+    def __len__(self) -> int:
+        """
+        .. admonition:: len
+
+            Wrapped items always contain just one item.
+
+            :returns: 1
+
+        """
+        return 1
+
     def __iter__(self) -> Iterator[T]:
         """
-        .. admonition:: Iter
+        .. admonition:: iter
 
-            Iterable, iterates wrapped item.
+            :yields: A reference to the wrapped item.
 
         """
         if self:
             yield self._item
 
-    def __str__(self) -> str:
-        """
-        .. admonition:: User string
-
-            Construct string 'Box(item_str)'
-            where ``item_str = str(item)`` for the currently contained
-            item. 
-
-        :returns: A string to reproduce the current state of the ``Box``. 
-
-        """
-        return 'Wrap(' + str(self._item) + ')'
-
     def __eq__(self, other: object) -> bool:
         """
-        .. admonition:: Equality comparison
+        .. admonition:: equality comparison
 
-            Efficiently compare ``Wrap`` to another object.
+            Compare ``Wrap`` to another object.
 
-        :param other: The object to be compared with,
-        :returns: ``True`` if ``other`` is of type Wrap and wraps
-                  an object which compares as equal to the wrapped
-                  object, otherwise ``False``.
+            :param other: Object to be compared.
+            :returns: ``True`` if ``other`` is of type Wrap and wraps
+                      an item which compares as equal to the wrapped
+                      item, otherwise ``False``.
 
         """
         if not isinstance(other, type(self)):
@@ -100,28 +91,50 @@ class Wrap[T]():
             return True
         return self._item == other._item
 
+    def __repr__(self) -> str:
+        """
+        .. admonition:: repr string
+
+            Construct string 'Wrap(item_str)'
+            where ``item_str = repr(item)`` for the contained item. 
+
+            :returns: A string to reproduce of the wrapped item. 
+
+        """
+        return 'Wrap(' + repr(self._item) + ')'
+
+    def __str__(self) -> str:
+        """
+        .. admonition:: user string
+
+            Construct string 'Wrap(item_str)'
+            where ``item_str = str(item)`` for the contained item. 
+
+            :returns: A string meaningful to an end user.
+
+        """
+        return 'Wrap(' + str(self._item) + ')'
+
     def map[U](self, f: Callable[[T], U]) -> 'Wrap[U]':
         """
-        .. admonition:: Map
+        .. admonition:: map
 
             Map function ``f`` over contents.
 
-        Map function ``f`` over contents.
-
-        :param f: Mapping function.
-        :returns: New instance.
+            :param f: Mapping function.
+            :returns: New instance.
 
         """
         return Wrap(f(self._item))
 
     def bind[U](self, f: Callable[[T], 'Wrap[U]']) -> 'Wrap[U]':
         """
-        .. admonition:: Bind
+        .. admonition:: bind
 
             Flatmap wrapped object with function ``f``.
 
-        :param f: Binding function.
-        :returns: New instance.
+            :param f: Binding function.
+            :returns: New instance.
 
         """
         return f(self._item)
@@ -129,15 +142,13 @@ class Wrap[T]():
 
 class HWrap[T: Hashable](Hashable):
     """
-    .. admonition:: Wrap hashable object
+    .. admonition:: HWrap
 
-        Immutablely wrap exactly one value of a
-        given hashable type. ``HWrap`` objects can
-        be used in Python match statements.
+        Immutablely wrap exactly one hashable item.
 
         .. tip::
 
-            ``HWrap`` objects are hashable.
+            ``HWrap`` objects are hashable and matchable.
 
     """
 
@@ -145,6 +156,14 @@ class HWrap[T: Hashable](Hashable):
     __match_args__ = ('_item',)
 
     def __init__(self, item: T) -> None:
+        """
+        .. admonition:: init
+
+            Initialize ``HWrap`` with 1 required item.
+
+            :param item: Item to be wrapped.
+
+        """
         self._item, self._hash = item, hash(item)
 
     def __hash__(self) -> int:
@@ -152,36 +171,44 @@ class HWrap[T: Hashable](Hashable):
 
     def __bool__(self) -> bool:
         """
-        .. admonition:: Bool
+        .. admonition:: bool
 
             Truthiness same as wrapped object.
 
         """
         return bool(self._item)
 
+    def __len__(self) -> int:
+        """
+        .. admonition:: len
+
+            HWrapped items always contain just one item.
+
+            :returns: 1
+
+        """
+        return 1
+
     def __iter__(self) -> Iterator[T]:
         """
-        .. admonition:: Iter
+        .. admonition:: iter
 
-            Iterable, iterates wrapped item.
+            :yields: A reference to the wrapped item.
 
         """
         if self:
             yield self._item
 
-    def __repr__(self) -> str:
-        return 'Wrap(' + repr(self._item) + ')'
-
     def __eq__(self, other: object) -> bool:
         """
-        .. admonition:: Equality comparison
+        .. admonition:: equality comparison
 
-            Efficiently compare to another object.
+            Compare ``HWrap`` to another object.
 
-        :param other: Object to be compared
-        :returns: ``True`` if ``other`` is of type HWrap and wraps
-                  an object which compares as equal to the wrapped
-                  object, otherwise ``False``.
+            :param other: Object to be compared.
+            :returns: ``True`` if ``other`` is of type HWrap and wraps
+                      an item which compares as equal to the wrapped
+                      item, otherwise ``False``.
 
         """
         if not isinstance(other, type(self)):
@@ -193,27 +220,51 @@ class HWrap[T: Hashable](Hashable):
             return True
         return self._item == other._item
 
+    def __repr__(self) -> str:
+        """
+        .. admonition:: repr string
+
+            Construct string 'HWrap(item_str)'
+            where ``item_str = repr(item)`` for the contained item. 
+
+            :returns: A string to reproduce of the wrapped object. 
+
+        """
+        return 'Wrap(' + repr(self._item) + ')'
+
+    def __str__(self) -> str:
+        """
+        .. admonition:: user string
+
+            Construct string 'HWrap(item_str)'
+            where ``item_str = str(item)`` for the contained item. 
+
+            :returns: A string meaningful to an end user.
+
+        """
+        return 'Wrap(' + str(self._item) + ')'
+
     def map[U](self, f: Callable[[T], U]) -> 'HWrap[U]':
         """
-        .. admonition:: Map
+        .. admonition:: map
 
             Map function ``f`` over wrapped the wrapped object
             returning a new ``HWrap`` instance.
 
-        :param f: Mapping function.
-        :returns: New instance.
+            :param f: Mapping function.
+            :returns: New instance.
 
         """
         return HWrap(f(self._item))
 
     def bind[U](self, f: Callable[[T], 'HWrap[U]']) -> 'HWrap[U]':
         """
-        .. admonition:: Bind
+        .. admonition:: bind
 
             Flatmap ``Box`` with function ``f``.
 
-        :param f: Binding function.
-        :returns: New instance.
+            :param f: Binding function.
+            :returns: New instance.
 
         """
         return f(self._item)

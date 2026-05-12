@@ -17,17 +17,24 @@ See `Semantic Versioning 2.0.0 <https://semver.org>`_.
 Releases and Important Milestones
 ---------------------------------
 
+PyPI 4.1.0 - 2026-05-12
+~~~~~~~~~~~~~~~~~~~~~~~
+
+- documentation now in maintenance mode
+- development status now "4 - Beta"
+- added a few missing methods
+
 PyPI 4.0.4 - 2026-04-26
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Much docstring work for sentinels. Need to push now going into
-documentation maintenance to fix broken links on PyPI.
+Much docstring work for sentinels. Need to push now to fix
+broken links on PyPI before going into documentation maintenance.
 
 Development Status Reappraisal - 2026-05-05
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Maintainer appraised the Development Status for
-pythonic-fp-gadgets to be ``"3 - Alpha"``.
+pythonic-fp-gadgets to be "3 - Alpha".
 
 PyPI 4.0.3 - 2026-04-26
 ~~~~~~~~~~~~~~~~~~~~~~~

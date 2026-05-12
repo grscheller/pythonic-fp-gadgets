@@ -59,6 +59,7 @@ def first_common_ancestor(cls1: type, cls2: type) -> type:
 
             This happens frequently when the function is given
             Python builtin types or in multiple inheritance situations.
+
     """
     if issubclass(cls1, cls2):
         return cls2

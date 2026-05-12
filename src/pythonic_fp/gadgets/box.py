@@ -52,7 +52,7 @@ class Box[T]:
 
             Initialize ``Box`` with 0 or 1 items.
 
-        :param item: An optional initial ``item`` for the ``Box``.
+            :param item: An optional initial item for the ``Box``.
 
         """
         self._item = item
@@ -68,9 +68,9 @@ class Box[T]:
 
     def __iter__(self) -> Iterator[T]:
         """
-        .. admonition:: Iterability
+        .. admonition:: iter
 
-            Iterates boxed item.
+            :yields: Boxed item.
 
         """
         if self:
@@ -83,7 +83,7 @@ class Box[T]:
             - 1 if ``Box`` contains an item
             - 0 if ``Box`` is empty
 
-        :returns: The number of items currently in the ``Box``.
+            :returns: The number of items currently in the ``Box``.
 
         """
         return 1 if self else 0
@@ -94,10 +94,10 @@ class Box[T]:
 
             Efficiently compare ``Box`` to another object.
 
-        :param other: The object to be compared.
-        :returns: ``True`` if ``other`` is another ``Box`` and contains
-                  an object which compares as equal to the object
-                  contained in the ``Box``, otherwise ``False``.
+            :param other: The object to be compared.
+            :returns: ``True`` if ``other`` is another ``Box`` containing
+                      an object which compares as equal to the item
+                      contained in the ``Box``, otherwise ``False``.
 
         """
         if not isinstance(other, type(self)):
@@ -111,17 +111,33 @@ class Box[T]:
 
     def __repr__(self) -> str:
         """
-        .. admonition:: Representation string
+        .. admonition:: repr string
 
             Construct string 'Box()' if empty, otherwise 'Box(item_repr)'
             where ``item_repr = repr(item)`` for the currently contained
             item. 
 
-        :returns: A string to reproduce the current state of the ``Box``. 
+            :returns: A string to reproduce the current state of the ``Box``. 
 
         """
         if self:
             return 'Box(' + repr(self._item) + ')'
+        return 'Box()'
+
+    def __str__(self) -> str:
+        """
+        .. admonition:: user string
+
+            Construct string 'Box()' if empty, otherwise 'Box(item_str)'
+            where ``item_str = str(item)`` for the currently contained
+            item. 
+
+            :returns: A user meaningful string to represent the current
+                      state of the ``Box``. 
+
+        """
+        if self:
+            return 'Box(' + str(self._item) + ')'
         return 'Box()'
 
     @overload
@@ -136,12 +152,12 @@ class Box[T]:
             Return the boxed item, if it exists, otherwise
             an alternate item, if given.
 
-        :param alt: An optional item of type ``T`` to return
-                    if the ``Box`` is empty.
-        :returns: Contents of ``Box`` or an alternate item, if given,
-                  when the ``Box`` is empty.
-        :raises ValueError: When the ``alt`` item is not provided
-                            but needed.
+            :param alt: An optional item of type ``T`` to return
+                        if the ``Box`` is empty.
+            :returns: Contents of ``Box`` or an alternate item, if given,
+                      when the ``Box`` is empty.
+            :raises ValueError: When the ``alt`` item is not provided
+                                but needed.
 
         """
         if self._item is not _sentinel:
@@ -157,8 +173,8 @@ class Box[T]:
 
             Pop item from ``Box`` if not empty.
 
-        :returns: The item contained in the ``Box``.
-        :raises ValueError: If Box is empty.
+            :returns: The item contained in the ``Box``.
+            :raises ValueError: If Box is empty.
 
         """
         if self._item is _sentinel:
@@ -174,8 +190,8 @@ class Box[T]:
 
             Push an item into ``Box`` if empty.
 
-        :param item: Item to push into the empty ``Box``.
-        :raises ValueError: If ``Box`` is not empty.
+            :param item: Item to push into the empty ``Box``.
+            :raises ValueError: If ``Box`` is not empty.
 
         """
         if self._item is _sentinel:
@@ -200,9 +216,9 @@ class Box[T]:
 
             Exchange an item with what is in the Box.
 
-        :param ``new_item``: New item to exchange for current item.
-        :returns: Original contents of the ``Box``.
-        :raises ValueError: If Box is empty.
+            :param ``new_item``: New item to exchange for current item.
+            :returns: Original contents of the ``Box``.
+            :raises ValueError: If Box is empty.
 
         """
         if self._item is _sentinel:
@@ -219,8 +235,8 @@ class Box[T]:
             Map function ``f`` over contents. We need to return a new
             instance since the type of Box can change.
 
-        :param f: Mapping function.
-        :returns: New instance.
+            :param f: Mapping function.
+            :returns: New instance.
 
         """
         if self._item is _sentinel:
@@ -233,8 +249,8 @@ class Box[T]:
 
             Flatmap ``Box`` with function ``f``.
 
-        :param f: Binding function.
-        :returns: New instance.
+            :param f: Binding function.
+            :returns: New instance.
 
         """
         if self._item is _sentinel:
