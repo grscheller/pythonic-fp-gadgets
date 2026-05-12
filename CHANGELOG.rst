@@ -17,6 +17,12 @@ See `Semantic Versioning 2.0.0 <https://semver.org>`_.
 Releases and Important Milestones
 ---------------------------------
 
+PyPI 4.0.4 - 2026-04-26
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Much docstring work for sentinels. Need to push now going into
+documentation maintenance to fix broken links on PyPI.
+
 Development Status Reappraisal - 2026-05-05
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

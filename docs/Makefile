@@ -5,7 +5,7 @@
 #  - later needs to agree with pyproject.toml
 PROJECT_NAME = Gadgets
 PYPI_NAME = gadgets
-RELEASE_VERSION = 4.0.3
+RELEASE_VERSION = 4.0.4
 DEVEL_VERSION = 4.0.4
 CUSTOM_VERSION = 0.0.0
 
