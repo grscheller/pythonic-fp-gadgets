@@ -1,5 +1,5 @@
 Description
------------
+===========
 
 .. automodule:: pythonic_fp.gadgets
     :no-members:
