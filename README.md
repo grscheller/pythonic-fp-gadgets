@@ -5,7 +5,6 @@ outside the Python Standard Library.
 
 PyPI project
 [pythonic-fp-gadgets](https://pypi.org/project/pythonic-fp-gadgets).
-
 Part of the
 [pythonic-fp](https://grscheller.github.io/pythonic-fp/)
 PyPI projects.
