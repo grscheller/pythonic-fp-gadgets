@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from pythonic_fp.circulararray.auto import ca, CA
 from pythonic_fp.gadgets import iterate_over_arguments as ita
+
 
 class TestGadgetIt:
     """Functionality testing"""
@@ -28,19 +28,10 @@ class TestGadgetIt:
         assert ref1 == trg1
 
         ref2 = [1, 2, 3]
-        trg2 = [*ita(1,2,3)]
+        trg2 = [*ita(1, 2, 3)]
         assert ref2 == trg2
 
-        ca_iter = CA((1, 2))
-        ca_args = ca(1, 2)
-        assert ca_iter == ca_args
-
-        ca0_ref: CA[int] = ca()
-        ca0_trg: CA[int] = CA[int](ita())
-        assert ca0_ref == ca0_trg
-
-        ca1_ref: CA[int] = CA((42, 7, 11, 100))
-        ca1_trg = CA(ita(42, 7, 11, 100))
-        ca1_splat1 = ca(*ita(42, 7, 11, 100))
-        ca1_splat2 = ca(*ita(42, 7), *ita(11, 100))
-        assert ca1_ref == ca1_trg == ca1_splat1 == ca1_splat2
+        nums = []
+        for num in ita(1, 2, 3, 21):
+            nums.append(2*num)
+        assert nums == [2, 4, 6, 42]
