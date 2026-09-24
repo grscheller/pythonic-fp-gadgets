@@ -4,10 +4,10 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "pythonic-fp-gadgets"
-version = "4.2.2"
+version = "4.3.1"
 description = "Gadgets without external Pythonic FP dependencies."
 readme = "README.md"
-requires-python = ">=3.12"  # syntactic floor: known to SyntaxError below 3.12
+requires-python = ">=3.14"  # floor: PEP 649/749 deferred annotations — class-level self-reference (SBool in its own ClassVar annotation) NameErrors on <3.14
 authors = [
   { name = "Geoffrey R. Scheller", email = "geoffrey@scheller.com" },
 ]
@@ -20,7 +20,8 @@ classifiers = [
   "Intended Audience :: Developers",
   "License :: OSI Approved :: Apache Software License",
   "Operating System :: OS Independent",
-  "Programming Language :: Python :: 3.14",  # tested: pytest test suite successful
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: 3.15",
   "Typing :: Typed",
 ]
 dependencies = []
