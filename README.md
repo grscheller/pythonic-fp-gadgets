@@ -9,17 +9,18 @@ Part of the
 [pythonic-fp](https://grscheller.github.io/pythonic-fp/)
 PyPI projects.
 
-## Documentation
+## Description
 
+Project Pythonic FP Gadgets contains
+
+- single item box
+- immutable wrapper class with (hashable) references
+- sentinel values
+- function returning iterator of its arguments
+- function to find the latest common ancestor of two classes
+ 
 Documentation and other links for this project are hosted on
 [GitHub Pages](https://grscheller.github.io/pythonic-fp/projects/gadgets.html).
-
-- Gadgets
-  - single item box
-  - immutable wrapped (hashable) references
-  - function returning iterator of its arguments
-  - function to find the latest common ancestor of two classes
-  - sentinel values
 
 ## Copyright and License
 

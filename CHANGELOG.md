@@ -15,6 +15,11 @@ See [Semantic Versioning 2.0.0](https://semver.org).
 
 ## Releases and Important Milestones
 
+### PyPI release 4.3.1 - 2026-09-26
+
+Redid release done with uv dependency resolution. Wheel for
+release 4.3.0 contained .mypy_cache/ clutter. Yanked 4.3.0 release.
+
 ### PyPI release 4.3.0 - 2026-09-24
 
 First release done with uv dependency resolution. Devel version
