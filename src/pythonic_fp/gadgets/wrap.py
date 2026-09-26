@@ -12,12 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from collections.abc import Callable, Hashable, Iterator
+
 __all__ = ['Wrap', 'HWrap']
 
-from collections.abc import Callable, Iterator, Hashable
-
-
-class Wrap[T]():
+class Wrap[T]:
     """
     .. admonition:: Wrap
 
@@ -115,7 +114,7 @@ class Wrap[T]():
         """
         return 'Wrap(' + str(self._item) + ')'
 
-    def map[U](self, f: Callable[[T], U]) -> 'Wrap[U]':
+    def map[U](self, f: Callable[[T], U]) -> Wrap[U]:
         """
         .. admonition:: map
 
@@ -127,7 +126,7 @@ class Wrap[T]():
         """
         return Wrap(f(self._item))
 
-    def bind[U](self, f: Callable[[T], 'Wrap[U]']) -> 'Wrap[U]':
+    def bind[U](self, f: Callable[[T], Wrap[U]]) -> Wrap[U]:
         """
         .. admonition:: bind
 
@@ -152,7 +151,7 @@ class HWrap[T: Hashable](Hashable):
 
     """
 
-    __slots__ = ('_item', '_hash')
+    __slots__ = ('_hash', '_item')
     __match_args__ = ('_item',)
 
     def __init__(self, item: T) -> None:
@@ -244,7 +243,7 @@ class HWrap[T: Hashable](Hashable):
         """
         return 'Wrap(' + str(self._item) + ')'
 
-    def map[U](self, f: Callable[[T], U]) -> 'HWrap[U]':
+    def map[U](self, f: Callable[[T], U]) -> HWrap[U]:
         """
         .. admonition:: map
 
@@ -257,7 +256,7 @@ class HWrap[T: Hashable](Hashable):
         """
         return HWrap(f(self._item))
 
-    def bind[U](self, f: Callable[[T], 'HWrap[U]']) -> 'HWrap[U]':
+    def bind[U](self, f: Callable[[T], HWrap[U]]) -> HWrap[U]:
         """
         .. admonition:: bind
 

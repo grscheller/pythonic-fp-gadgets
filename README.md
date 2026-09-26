@@ -14,7 +14,7 @@ PyPI projects.
 Project Pythonic FP Gadgets contains
 
 - single item box
-- immutable wrapper class with (hashable) references
+- immutable wrapper classes, matchable, hashable and non-hashable versions
 - sentinel values
 - function returning iterator of its arguments
 - function to find the latest common ancestor of two classes

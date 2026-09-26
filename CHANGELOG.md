@@ -15,15 +15,19 @@ See [Semantic Versioning 2.0.0](https://semver.org).
 
 ## Releases and Important Milestones
 
-### PyPI release 4.3.1 - 2026-09-26
+### PyPI release 4.4.0 - 2026-09-26
+
+Removed *.pyi files. Removed quoted types. Updated README.md.
+Yanked 4.3.1 release due to quoted types.
+
+### PyPI release 4.3.1 - 2026-09-26 (Yanked)
 
 Redid release done with uv dependency resolution. Wheel for
 release 4.3.0 contained .mypy_cache/ clutter. Yanked 4.3.0 release.
 
-### PyPI release 4.3.0 - 2026-09-24
+### PyPI release 4.3.0 - 2026-09-24 (Yanked)
 
-First release done with uv dependency resolution. Devel version
-tentatively 4.3.1 (updated after PyPI release).
+First release done with uv dependency resolution.
 
 ### PyPI 4.1.0 - 2026-05-12
 
