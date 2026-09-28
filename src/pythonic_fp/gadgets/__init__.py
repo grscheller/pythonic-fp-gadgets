@@ -27,7 +27,6 @@ Gadgets
 """
 
 from collections.abc import Iterator
-from inspect import getmro
 
 __all__ = ['first_common_ancestor', 'iterate_over_arguments']
 
@@ -38,27 +37,33 @@ __license__ = 'Apache License 2.0'
 
 def first_common_ancestor(cls1: type, cls2: type) -> type:
     """
-    .. admonition:: Least upper bound
+    .. admonition:: First common ancestor
 
-        Find the least upper bound in the inheritance graph
-        of two classes.
+        Best effort to find the least upper bound in the inheritance
+        graph of two classes.
 
         :param cls1: A class in the inheritance hierarchy.
         :param cls2: A class in the inheritance hierarchy.
-        :returns: First common ancestor based on ``getmro`` order.
-        :raises TypeError: Raised when no common ancestor exists, or when
-                           not caught when raised by ``inspect.getmro``.
+        :returns: First common ancestor in ``cls1.__mro__`` order.
+        :raises TypeError: Defensively raised when no common ancestor
+                           is found.
 
-        .. warning::
+        .. note::
 
-            This function can fail with a TypeError. Some error messages
-            seen are
+            The function is not symmetric in its arguments. In genuine
+            multiple inheritance graphs, swapping ``cls1`` and ``cls2``
+            can yield a different ancestor. Also, a virtual ancestor
+            registered with an ABC may be a tighter bound than anything
+            in the actual MRO.
 
-            - multiple bases have instance lay-out conflict
-            - type 'bool' is not an acceptable base type
+        .. note::
 
-            This happens frequently when the function is given
-            Python builtin types or in multiple inheritance situations.
+            Since ``object`` terminates all actual MRO's, ``TypeError``
+            is unlikely to ever be thrown, except in the case of some
+            exotic metaclass breaking this assumption. This exception
+            is here mainly to let typing tools know that object ``None``
+            is not a possible return type.
+
 
     """
     if issubclass(cls1, cls2):
@@ -66,10 +71,10 @@ def first_common_ancestor(cls1: type, cls2: type) -> type:
     if issubclass(cls2, cls1):
         return cls1
 
-    for common_ancestor in getmro(type('LcaDiamondClass', (cls1, cls2), {})):
-        if issubclass(cls1, common_ancestor) and issubclass(cls2, common_ancestor):
-            return common_ancestor
-    raise TypeError("latest_common_ancestor: no common ancestor found!!!")
+    for ancestor in cls1.__mro__:
+        if issubclass(cls2, ancestor):
+            return ancestor
+    raise TypeError("first_common_ancestor: no common ancestor found!")
 
 
 def iterate_over_arguments[A](*args: A) -> Iterator[A]:

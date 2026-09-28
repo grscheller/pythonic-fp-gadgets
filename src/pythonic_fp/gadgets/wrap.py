@@ -147,7 +147,7 @@ class HWrap[T: Hashable](Hashable):
 
         .. tip::
 
-            ``HWrap`` objects are hashable and matchable.
+            ``HWrap`` objects are matchable and hashable.
 
     """
 
@@ -163,7 +163,7 @@ class HWrap[T: Hashable](Hashable):
             :param item: Item to be wrapped.
 
         """
-        self._item, self._hash = item, hash(item)
+        self._item, self._hash = item, hash((item, '_hwrap'))
 
     def __hash__(self) -> int:
         return self._hash

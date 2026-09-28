@@ -15,7 +15,7 @@
 from pythonic_fp.gadgets import first_common_ancestor as fca
 
 
-class A1():
+class A1:
     pass
 
 class A1B1(A1):
@@ -36,7 +36,7 @@ class A1B2C1(A1B2):
 class A1B2C2(A1B2):
     pass
 
-class A2():
+class A2:
     pass
 
 class A2B1(A2):
@@ -69,7 +69,7 @@ class A2B2C2D1(A2B2C2):
 class A2B2C2D2(A2B2C2):
     pass
 
-class TestLatestCommonAncestor:
+class TestFirstCommonAncestor:
     """Functionality testing"""
 
     def test_self(self) -> None:
@@ -113,3 +113,22 @@ class TestLatestCommonAncestor:
         assert fca(A1, A2) is object
         assert fca(A2B2C2D2, A1B2C2) is object
         assert fca(A1B2C1, A2B1C1) is object
+
+class TestBuiltInFirstCommonAncestor:
+    """Edge case testing"""
+
+    def test_self(self) -> None:
+        assert fca(int, int) is int
+        assert fca(bool, bool) is bool
+        assert fca(int, bool) is int
+        assert fca(bool, int) is int
+        assert fca(bool, str) is object
+        assert fca(str, bool) is object
+        assert fca(float, str) is object
+        assert fca(str, float) is object
+        assert fca(float, int) is object
+        assert fca(int, float) is object
+        assert fca(float, complex) is object
+        assert fca(complex, float) is object
+        assert fca(complex, complex) is complex
+        assert fca(set, dict) is object

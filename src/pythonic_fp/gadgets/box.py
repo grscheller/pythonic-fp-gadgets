@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from collections.abc import Callable, Iterator
-from typing import cast, Final, overload
+from typing import Final, cast, overload
 
 __all__ = ['Box']
 
@@ -105,9 +105,7 @@ class Box[T]:
 
         if self._item is other._item:
             return True
-        if self._item == other._item:
-            return True
-        return False
+        return self._item == other._item
 
     def __repr__(self) -> str:
         """
@@ -199,7 +197,6 @@ class Box[T]:
         else:
             msg = 'Box: Trying to push an item in a non-empty Box'
             raise ValueError(msg)
-        return None
 
     def put(self, item: T) -> None:
         """
@@ -228,7 +225,7 @@ class Box[T]:
         self._item = new_item
         return popped
 
-    def map[U](self, f: Callable[[T], U]) -> 'Box[U]':
+    def map[U](self, f: Callable[[T], U]) -> Box[U]:
         """
         .. admonition:: Map
 
@@ -243,7 +240,7 @@ class Box[T]:
             return Box()
         return Box(f(cast(T, self._item)))
 
-    def bind[U](self, f: Callable[[T], 'Box[U]']) -> 'Box[U]':
+    def bind[U](self, f: Callable[[T], Box[U]]) -> Box[U]:
         """
         .. admonition:: Bind
 

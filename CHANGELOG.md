@@ -15,6 +15,11 @@ See [Semantic Versioning 2.0.0](https://semver.org).
 
 ## Releases and Important Milestones
 
+### PyPI release 4.5.0 - 2026-09-27
+
+Removed *.pyi files. Removed remaining quoted types. Updated README.md.
+Reimplemented latest_common_ancestor function.
+
 ### PyPI release 4.4.0 - 2026-09-26
 
 Removed *.pyi files. Removed quoted types. Updated README.md.

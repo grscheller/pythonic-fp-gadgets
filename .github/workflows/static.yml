@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
 
 env:
-  RELEASE: '4.4.0'
-  DEVEL: '4.4.1'
+  RELEASE: '4.5.0'
+  DEVEL: '4.5.1'
   PYTHON: '3.14'
 
 permissions:
