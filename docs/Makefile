@@ -5,8 +5,8 @@
 #  - later needs to agree with pyproject.toml
 PROJECT_NAME = Gadgets
 PYPI_NAME = gadgets
-RELEASE_VERSION = 4.5.0
-DEVEL_VERSION = 4.5.1
+RELEASE_VERSION = 4.6.0
+DEVEL_VERSION = 6.0.0
 CUSTOM_VERSION = 0.0.0
 
 SPHINXOPTS ?=
