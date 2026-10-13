@@ -1,4 +1,4 @@
-name: Build and Deploy Furo Themed Sphinx Documentation
+name: Deploy Sphinx last release and devel docs
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
 
 env:
-  RELEASE: '6.0.0'
-  DEVEL: '6.0.1'
+  RELEASE: '4.6.0'
+  DEVEL: '6.0.0'
   PYTHON: '3.14'
 
 permissions:
@@ -27,29 +27,43 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
-      - name: Select Python
-        uses: actions/setup-python@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10
         with:
           python-version: ${{ env.PYTHON }}
+          enable-cache: true
+          cache-dependency-glob: "pyproject.toml"
 
-      - name: Install Sphinx Dependencies
+      - name: Install Graphviz
         run: |
-          pip install -r docs/requirements.txt
+          sudo apt-get update
           sudo apt-get install -y graphviz
 
       - name: Build Release Docs
+        env:
+          UV_PROJECT_ENVIRONMENT: .venv-release
         run: |
-          pip install pythonic-fp-gadgets
+          uv sync --only-group docs
+          uv pip install --python .venv-release \
+            "pythonic-fp-gadgets==${{ env.RELEASE }}"
           docs/gen_conf.py release ${{ env.RELEASE }} Gadgets gadgets > docs/source/conf.py
-          sphinx-build -M html docs/source docs/build/release
+          .venv-release/bin/sphinx-build -b html docs/source docs/build/release
 
       - name: Build Development Docs
+        env:
+          UV_PROJECT_ENVIRONMENT: .venv-devel
         run: |
-          pip install -e .
           docs/gen_conf.py devel ${{ env.DEVEL }} Gadgets gadgets > docs/source/conf.py
-          sphinx-build -M html docs/source docs/build/development
+          uv run --no-default-groups --group docs -- \
+            sphinx-build -b html docs/source docs/build/development
+
+      - name: Build Root Landing Page
+        run: |
+          sed -e 's/@RELEASE@/${{ env.RELEASE }}/g' \
+              -e 's/@DEVEL@/${{ env.DEVEL }}/g' \
+              docs/gen_index.html > docs/build/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v6
