@@ -52,6 +52,11 @@ devel: setup_devel $(BUILDDIR)/index.html
 release: setup_release $(BUILDDIR)/index.html
 	@$(SPHINXBUILD) -b html "$(SOURCEDIR)" "$(BUILDDIR)"/release $(SPHINXOPTS)
 
+
+# Expose Makefile variables to scripts: make print-RELEASE_VERSION
+print-%:
+	@echo $($*)
+
 .PHONY: help setup_devel setup_release devel release
 .PHONY: clean_source clean_devel clean_release clean_index_html clean
 
