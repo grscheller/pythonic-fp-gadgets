@@ -32,6 +32,9 @@ up to the `6.0.0` release level, if not already at the `6.x.y` level.
 The next pythonic-fp release will be `6.0.0` to track these for
 integration testing.
 
+Made docs/Makefile the source of truth for Sphinx documentation generation.
+Updated Makefile, gen_conf.py, and index.html.in in the docs/ directory.
+
 ### PyPI release 4.5.0 - 2026-09-27
 
 Removed *.pyi files. Removed remaining quoted types. Updated README.md.
