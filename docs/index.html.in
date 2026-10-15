@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>Pythonic FP Gadgets documentation</title>
+<title>Pythonic FP @PROJECTNAME@ documentation</title>
 <style>
 /* Palette lifted from Furo's own CSS so this page matches the Sphinx builds. */
 :root {
@@ -151,7 +151,7 @@ footer {
 </head>
 <body>
 <main>
-  <h1>Pythonic FP Gadgets</h1>
+  <h1>Pythonic FP @PROJECTNAME@</h1>
   <p class="lede">
     A collection of miscellaneous self-contained functions and classes with
     minimal dependencies.
@@ -160,12 +160,12 @@ footer {
   <div class="builds">
     <a class="build" href="release/">
       <span class="name">Release documentation</span>
-      <span class="version">pythonic-fp-gadgets @RELEASE@</span>
+      <span class="version">pythonic-fp-@PYPINAME@ @RELEASE@</span>
       <span class="note">Documents the version currently published on PyPI.</span>
     </a>
     <a class="build" href="development/">
       <span class="name">Development documentation</span>
-      <span class="version">pythonic-fp-gadgets @DEVEL@</span>
+      <span class="version">pythonic-fp-@PYPINAME@ @DEVEL@</span>
       <span class="note">Built from the tip of the <code>main</code> branch. Unreleased.</span>
     </a>
   </div>
@@ -173,11 +173,11 @@ footer {
   <h2>Elsewhere</h2>
   <ul class="links">
     <li>PyPI project
-      <a href="https://pypi.org/project/pythonic-fp-gadgets/">pythonic-fp-gadgets</a>.</li>
+      <a href="https://pypi.org/project/pythonic-fp-@PYPINAME@/">pythonic-fp-@PYPINAME@</a>.</li>
     <li>GitHub source code repo
-      <a href="https://github.com/grscheller/pythonic-fp-gadgets">grscheller/pythonic-fp-gadgets</a>.</li>
+      <a href="https://github.com/grscheller/pythonic-fp-@PYPINAME@">grscheller/pythonic-fp-@PYPINAME@</a>.</li>
     <li>Part of the
-      <a href="https://grscheller.github.io/pythonic-fp/projects/gadgets.html">Pythonic FP</a>
+      <a href="https://grscheller.github.io/pythonic-fp/projects/@PYPINAME@.html">Pythonic FP</a>
       family of projects.</li>
   </ul>
 

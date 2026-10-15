@@ -1,10 +1,10 @@
 # Makefile for Sphinx documentation
+
+# Next four are the source of truth - what is in pyproject.toml
+# should agree with first two and one of the last two.
 PROJECT_NAME = Gadgets
 PYPI_NAME = gadgets
-
-# last PyPI release - needs to agree with last release on PyPI
 RELEASE_VERSION = 4.6.0
-# future PyPI release - needs to agree with what is in pyproject.toml
 DEVEL_VERSION = 6.0.0
 
 SPHINXOPTS ?=
@@ -42,6 +42,8 @@ setup_release: clean_release clean_index_html
 $(BUILDDIR)/index.html: index.html.in Makefile
 	@sed -e 's/@RELEASE@/$(RELEASE_VERSION)/g' \
 	     -e 's/@DEVEL@/$(DEVEL_VERSION)/g' \
+	     -e 's/@PROJECTNAME@/$(PROJECT_NAME)/g' \
+	     -e 's/@PYPINAME@/$(PYPI_NAME)/g' \
 	     $< > $@
 
 # Build development labeled docs
@@ -51,7 +53,6 @@ devel: setup_devel $(BUILDDIR)/index.html
 # Build release labeled docs
 release: setup_release $(BUILDDIR)/index.html
 	@$(SPHINXBUILD) -b html "$(SOURCEDIR)" "$(BUILDDIR)"/release $(SPHINXOPTS)
-
 
 # Expose Makefile variables to scripts: make print-RELEASE_VERSION
 print-%:
