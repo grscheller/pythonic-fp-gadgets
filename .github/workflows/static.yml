@@ -44,8 +44,9 @@ jobs:
           UV_PROJECT_ENVIRONMENT: .venv-release
         run: |
           RELEASE=$(make -C docs -s --no-print-directory print-RELEASE_VERSION)
+          PROJECT=pythonic-fp-$(make -C docs -s --no-print-directory print-PYPI_NAME)
           uv sync --only-group docs
-          uv pip install --python .venv-release "pythonic-fp-gadgets==${RELEASE}"
+          uv pip install --python .venv-release "${PROJECT}==${RELEASE}"
           PATH="$PWD/.venv-release/bin:$PATH" make -C docs release
 
       - name: Build Development Docs
