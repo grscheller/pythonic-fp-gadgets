@@ -6,10 +6,13 @@ outside the Python Standard Library.
 PyPI project
 [pythonic-fp-gadgets](https://pypi.org/project/pythonic-fp-gadgets).
 Part of the
-[pythonic-fp](https://grscheller.github.io/pythonic-fp/)
+[pythonic-fp](https://grscheller.github.io/pythonic-fp)
 PyPI projects.
 
-## Description
+## Documentation
+
+Documentation and other links for this project are hosted on
+[GitHub Pages](https://grscheller.github.io/pythonic-fp-gadgets).
 
 Project Pythonic FP Gadgets contains
 
@@ -19,9 +22,6 @@ Project Pythonic FP Gadgets contains
 - function returning iterator of its arguments
 - function to find the latest common ancestor of two classes
  
-Documentation and other links for this project are hosted on
-[GitHub Pages](https://grscheller.github.io/pythonic-fp/projects/gadgets.html).
-
 ## Copyright and License
 
 Copyright (c) 2025-2026 Geoffrey R. Scheller. Licensed under the Apache
