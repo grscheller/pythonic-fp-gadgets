@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import threading
-from typing import ClassVar, final, Hashable
+from collections.abc import Hashable
+from threading import Lock
+from typing import Any, ClassVar, cast, final
 
 __all__ = ['Sentinel']
 
@@ -36,34 +37,54 @@ class Sentinel[H: Hashable]:
 
     __slots__ = ('_flavor',)
 
-    _flavors: 'dict[H, Sentinel[H]]' = {}
-    _lock: ClassVar[threading.Lock] = threading.Lock()
+    _flavor: H
 
-    def __new__(cls, flavor: H) -> 'Sentinel[H]':
+    _flavors: ClassVar[dict[Any, Sentinel[Any]]] = {}
+    _lock: ClassVar[Lock] = Lock()
+
+    def __new__(cls, flavor: H) -> Sentinel[H]:
         """
         .. admonition:: new
 
             :param flavor: Hashable value determining which
-                           flavored ``Sentinel`` to return.
-            :returns: The ``Sentinel(flavor)`` singleton instance.
+                           flavored Sentinel to return.
+            :returns: The Sentinel(flavor) singleton instance.
 
         """
         if flavor not in cls._flavors:
             with cls._lock:
                 if flavor not in cls._flavors:
-                    cls._flavors[flavor] = super().__new__(cls)
-        return cls._flavors[flavor]
+                    sentinel = super().__new__(cls)
+                    sentinel._flavor = flavor
+                    cls._flavors[flavor] = sentinel
+        return cast(Sentinel[H], cls._flavors[flavor])
 
-    def __init__(self, flavor: H) -> None:
+    def __reduce__(self) -> tuple[type[Sentinel[H]], tuple[H]]:
         """
-        .. admonition:: init
+        .. admonition:: reduce
 
-            :param flavor: Hashable value to initially cache the flavor
-            :type flavor: ``H: Hashable``
+            Tell ``pickle`` and ``copy`` how to reconstruct the
+            sentinel: call ``Sentinel(flavor)`` rather than rebuilding
+            the object directly.
+
+            - reconstruction goes through ``__new__``, so the flavor
+              cache is consulted
+            - unpickling returns the existing singleton of that flavor,
+              or creates and caches it in a fresh interpreter
+            - ``copy`` and ``deepcopy`` use the same protocol, so they
+              return the singleton unchanged
+
+            :returns: The pair ``(Sentinel, (flavor,))``, which
+                      ``pickle`` calls to rebuild the sentinel.
+
+            .. important::
+
+                Without this, ``pickle`` would construct a duplicate
+                ``Sentinel`` outside the flavor cache, and ``is``
+                comparisons against it would silently fail.
 
         """
-        if not hasattr(self, '_flavor'):
-            self._flavor = flavor
+        return (Sentinel, (self._flavor,))
 
     def __repr__(self) -> str:
         """
@@ -75,7 +96,7 @@ class Sentinel[H: Hashable]:
             :returns: A string to reproduce the flavored sentinel.
 
         """
-        return "Sentinel('" + repr(self._flavor) + "')"
+        return 'Sentinel(' + repr(self._flavor) + ')'
 
     def __str__(self) -> str:
         """
@@ -87,7 +108,7 @@ class Sentinel[H: Hashable]:
             :returns: A string meaningful to an end user.
 
         """
-        return "Sentinel('" + str(self._flavor) + "')"
+        return 'Sentinel(' + str(self._flavor) + ')'
 
     def flavor(self) -> H:
         """

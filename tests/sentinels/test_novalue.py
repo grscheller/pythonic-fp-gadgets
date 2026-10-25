@@ -1,4 +1,4 @@
-# Copyright 2023-2025 Geoffrey R. Scheller
+# Copyright 2023-2026 Geoffrey R. Scheller
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,15 +12,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import cast, Final, overload
+"""Tests NoValue in a contrived situation."""
+
+from typing import cast, overload
+
 from pythonic_fp.gadgets.sentinels.novalue import NoValue
+
+novalue1 = NoValue()
+novalue2 = NoValue()
 
 
 class TestStrRepr:
     def test_noValue_str(self) -> None:
-        noValue: Final[NoValue] = NoValue()
+        noValue: NoValue = NoValue()
         assert str(noValue) == 'NoValue()'
         assert repr(noValue) == 'NoValue()'
+
+
+class TestSingleton:
+    def test_singleton_instance(self) -> None:
+        assert novalue1 is novalue2
+
+    def test_nonstandard_equality_symmatrics(self) -> None:
+        assert (novalue1 == novalue2) is False
+        assert (novalue1 != novalue2) is False
+        assert (novalue1 == 42) is False
+        assert (42 != novalue2) is False
 
 
 class Foo:
@@ -29,7 +46,7 @@ class Foo:
     @overload
     def __init__(self, repeat: None, /) -> None: ...
 
-    def __init__(self, repeat: int | None | NoValue = NoValue(), /) -> None:
+    def __init__(self, repeat: int | None | NoValue = novalue1, /) -> None:
         if repeat is None:
             self._repeat = 0
         else:
@@ -47,14 +64,14 @@ class RepeatFoo(Foo):
     @overload
     def __init__(self, repeat: int, /) -> None: ...
 
-    def __init__(self, repeat: int | None | NoValue = NoValue(), /) -> None:
+    def __init__(self, repeat: int | None | NoValue = novalue2, /) -> None:
         if repeat is None:
             self._repeat = 1
         elif repeat is NoValue():
             self._repeat = 2
         else:
             ii: int = cast(int, repeat)
-            self._repeat = ii if ii >=0 else -ii
+            self._repeat = ii if ii >= 0 else -ii
 
 
 class TestNoValue:

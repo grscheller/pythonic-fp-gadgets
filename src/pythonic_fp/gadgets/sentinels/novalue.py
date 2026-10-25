@@ -97,11 +97,11 @@ class NoValue:
 
     __slots__ = ()
 
-    _instance: 'ClassVar[NoValue | None]' = None
+    _instance: ClassVar[NoValue | None] = None
     _lock: ClassVar[threading.Lock] = threading.Lock()
     _hash: ClassVar[int] = 0
 
-    def __new__(cls) -> 'NoValue':
+    def __new__(cls) -> NoValue:
         """
         .. admonition:: new
 
@@ -122,6 +122,23 @@ class NoValue:
             :returns: The singleton's unique integer hash value.
         """
         return type(self)._hash
+
+    def __eq__(self, other: object) -> bool:
+        """
+        .. admonition:: Equality comparison
+
+            :param other: The object to be compared.
+            :returns: ``False`` even if compared to itself.
+
+            .. warning::
+
+                - non-standard comparison semantics
+                - always returns ``False``
+                - if one or both values are missing,
+                  then what is there to compare?
+
+        """
+        return False
 
     def __repr__(self) -> str:
         """
@@ -151,23 +168,6 @@ class NoValue:
                     if predicate(x):
                         result = 'some non-empty string'
                     value = result or 'fallback string'
-
-        """
-        return False
-
-    def __eq__(self, other: object) -> bool:
-        """
-        .. admonition:: Equality comparison
-
-            :param other: The object to be compared.
-            :returns: ``False`` even if compared to itself.
-
-            .. warning::
-
-                - non-standard comparison semantics
-                - always returns ``False``
-                - if one or both values are missing,
-                  then what is there to compare?
 
         """
         return False

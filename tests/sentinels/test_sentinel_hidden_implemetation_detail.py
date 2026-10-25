@@ -12,12 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import cast, ClassVar, Final, overload
+"""Tests Flavored Sentinel implementing a hidden implementation."""
+
+from typing import ClassVar, Final, cast, overload
+
 from pythonic_fp.gadgets.sentinels.flavored import Sentinel
 
 
 class MyClass:
-    _sentinel: Final[ClassVar[Sentinel[str]]] = Sentinel('_secret_str')
+    _sentinel1: Final[Sentinel[str]] = Sentinel('_secret_str')
+    _sentinel2: ClassVar[Sentinel[str]] = Sentinel('_secret_str')
 
     @overload
     def __init__(self) -> None: ...
@@ -29,9 +33,9 @@ class MyClass:
     def __init__(self, value: float | None) -> None: ...
 
     def __init__(
-        self, value: float | None | Sentinel[str] = Sentinel('_secret_str')
+        self, value: float | None | Sentinel[str] = _sentinel1
     ) -> None:
-        if value is self._sentinel:
+        if value is self._sentinel2:
             self.value: float | None = 42.0
         else:
             self.value = cast(float | None, value)
