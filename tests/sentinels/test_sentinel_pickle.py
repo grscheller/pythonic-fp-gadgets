@@ -74,4 +74,4 @@ class TestSentinelPickle:
 
     def test_repr_reproduces_the_sentinel(self) -> None:
         sentinel = Sentinel('alpha')
-        assert eval(repr(sentinel)) is sentinel  # noqa: S307
+        assert eval(repr(sentinel)) is sentinel
