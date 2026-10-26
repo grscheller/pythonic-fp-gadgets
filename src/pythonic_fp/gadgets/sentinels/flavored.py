@@ -59,7 +59,7 @@ class Sentinel[H: Hashable]:
                     cls._flavors[flavor] = sentinel
         return cast(Sentinel[H], cls._flavors[flavor])
 
-    def __reduce__(self) -> tuple[type[Sentinel[H]], tuple[H]]:
+    def __reduce__(self) -> tuple[Sentinel[H], tuple[H]]:
         """
         .. admonition:: reduce
 

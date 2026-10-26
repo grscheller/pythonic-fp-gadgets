@@ -111,9 +111,35 @@ class NoValue:
         if cls._instance is None:
             with cls._lock:
                 if cls._instance is None:
-                    cls._hash = id(cls)
                     cls._instance = super().__new__(cls)
         return cls._instance
+
+    def __reduce__(self) -> tuple[NoValue, tuple[()]]:
+        """
+        .. admonition:: reduce
+
+            Tell ``pickle`` and ``copy`` how to reconstruct the
+            sentinel: call ``Sentinel(flavor)`` rather than rebuilding
+            the object directly.
+
+            - reconstruction goes through ``__new__``, so the flavor
+              cache is consulted
+            - unpickling returns the existing singleton of that flavor,
+              or creates and caches it in a fresh interpreter
+            - ``copy`` and ``deepcopy`` use the same protocol, so they
+              return the singleton unchanged
+
+            :returns: The pair ``(Sentinel, (flavor,))``, which
+                      ``pickle`` calls to rebuild the sentinel.
+
+            .. important::
+
+                Without this, ``pickle`` would construct a duplicate
+                ``Sentinel`` outside the flavor cache, and ``is``
+                comparisons against it would silently fail.
+
+        """
+        return (NoValue, ())
 
     def __hash__(self) -> int:
         """
@@ -121,7 +147,7 @@ class NoValue:
 
             :returns: The singleton's unique integer hash value.
         """
-        return type(self)._hash
+        return 2373514739823364275  # hash('NoValue')
 
     def __eq__(self, other: object) -> bool:
         """
