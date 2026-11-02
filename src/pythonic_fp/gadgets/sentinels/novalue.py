@@ -114,7 +114,7 @@ class NoValue:
                     cls._instance = super().__new__(cls)
         return cls._instance
 
-    def __reduce__(self) -> tuple[NoValue, tuple[()]]:
+    def __reduce__(self) -> tuple[type[NoValue], tuple[()]]:
         """
         .. admonition:: reduce
 
