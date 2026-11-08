@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Pickle tests for truthy_falsy booleans."""
+"""Pickle tests for flavored sentinels."""
 
 import pickle
 import subprocess
@@ -34,7 +34,7 @@ class TestNoValuePickle:
                 restored = pickle.loads(pickle.dumps(item, protocol=protocol))
                 assert restored is item, f'protocol {protocol} made a new instance'
 
-    def test_identity_with_Sentinel(self) -> None:
+    def test_identity_with_flavored_sentinel(self) -> None:
         fl_42_int, fl_10_int, fl_00_int = Sentinel(42), Sentinel(10), Sentinel(0)
         for protocol in range(pickle.HIGHEST_PROTOCOL + 1):
             r_fl_42_int, r_fl_10_int, r_fl_00_int = pickle.loads(

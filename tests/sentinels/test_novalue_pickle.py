@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Pickle tests for truthy_falsy booleans."""
+"""Pickle tests for novalue sentinels."""
 
 import pickle
 import subprocess
@@ -56,7 +56,7 @@ class TestNoValuePickle:
             assert restored['c'] is nada
             assert restored['c'] is nono
 
-    def test_copy_and_deepcopy_return_the_singletons(self) -> None:
+    def test_copy_and_deepcopy_return_the_novalue_singletons(self) -> None:
         nada1 = NoValue()
         nada2 = NoValue()
         assert copy(nada1) is nada1

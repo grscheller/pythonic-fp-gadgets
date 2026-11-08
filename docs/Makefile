@@ -4,8 +4,8 @@
 # should agree with first two and one of the last two.
 PROJECT_NAME = Gadgets
 PYPI_NAME = gadgets
-CURR_ROLLING_RELEASE_VERSION = 4.6.0
-DEVEL_VERSION = 6.0.0
+CURR_ROLLING_RELEASE_VERSION = 6.0.0
+DEVEL_VERSION = 6.0.1
 PREV_ROLLING_RELEASE_VERSION = 4.6.0
 
 SPHINXOPTS ?=
@@ -13,9 +13,9 @@ SPHINXBUILD ?= sphinx-build
 SOURCEDIR = source
 BUILDDIR = build
 
-# Put help first so that "make" without argument is like "make help"
+# Give build info if "make" without arguments is given
 help:
-	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
+	@echo To build docs: uv run make {devel | curr_release | prev_release}
 
 clean_source:
 	@rm -f "$(SOURCEDIR)"/conf.py
@@ -36,18 +36,20 @@ clean: clean_prev_release clean_curr_release clean_devel clean_source clean_inde
 	@echo Removed all doc build artifacts.
 
 setup_curr_release: clean_curr_release clean_index_html
-	@./gen_conf.py curr_release "$(CURR_ROLLING_RELEASE_VERSION)" "$(PROJECT_NAME)" "$(PYPI_NAME)" > "$(SOURCEDIR)"/conf.py
+	@python3 gen_conf.py curr_release "$(CURR_ROLLING_RELEASE_VERSION)" "$(PROJECT_NAME)" "$(PYPI_NAME)" > "$(SOURCEDIR)"/conf.py
 	@echo Generating source/conf.py for current rolling release
 
-setup_devel: clean_devel clean_index_html
-	@./gen_conf.py devel "$(DEVEL_VERSION)" "$(PROJECT_NAME)" "$(PYPI_NAME)" > "$(SOURCEDIR)"/conf.py
-	@echo Generating source/conf.py for devel
-
 setup_prev_release: clean_prev_release clean_index_html
-	@./gen_conf.py prev_release "$(PREV_ROLLING_RELEASE_VERSION)" "$(PROJECT_NAME)" "$(PYPI_NAME)" > "$(SOURCEDIR)"/conf.py
+	@python3 gen_conf.py prev_release "$(PREV_ROLLING_RELEASE_VERSION)" "$(PROJECT_NAME)" "$(PYPI_NAME)" > "$(SOURCEDIR)"/conf.py
+	@sed -e 's/@CURR_RELEASE@/$(CURR_ROLLING_RELEASE_VERSION)/g'
 	@echo Generating source/conf.py for previous rolling release
 
+setup_devel: clean_devel clean_index_html
+	@python3 gen_conf.py devel "$(DEVEL_VERSION)" "$(PROJECT_NAME)" "$(PYPI_NAME)" > "$(SOURCEDIR)"/conf.py
+	@echo Generating source/conf.py for devel
+
 $(BUILDDIR)/index.html: index.html.in Makefile
+	@mkdir -p $(BUILDDIR)
 	@sed -e 's/@CURR_RELEASE@/$(CURR_ROLLING_RELEASE_VERSION)/g' \
 	     -e 's/@DEVEL@/$(DEVEL_VERSION)/g' \
          -e 's/@PREV_RELEASE@/$(PREV_ROLLING_RELEASE_VERSION)/g' \
@@ -59,21 +61,22 @@ $(BUILDDIR)/index.html: index.html.in Makefile
 curr_release: setup_curr_release $(BUILDDIR)/index.html
 	@$(SPHINXBUILD) -b html "$(SOURCEDIR)" "$(BUILDDIR)"/curr_release $(SPHINXOPTS)
 
-# Build development labeled docs
-devel: setup_devel $(BUILDDIR)/index.html
-	@$(SPHINXBUILD) -b html "$(SOURCEDIR)" "$(BUILDDIR)"/devel $(SPHINXOPTS)
-
 # Build previous rolling release labeled docs
 prev_release: setup_prev_release $(BUILDDIR)/index.html
 	@$(SPHINXBUILD) -b html "$(SOURCEDIR)" "$(BUILDDIR)"/prev_release $(SPHINXOPTS)
+
+# Build development labeled docs
+devel: setup_devel $(BUILDDIR)/index.html
+	@$(SPHINXBUILD) -b html "$(SOURCEDIR)" "$(BUILDDIR)"/devel $(SPHINXOPTS)
 
 # Expose Makefile variables to scripts: make print-DEVEL_VERSION
 print-%:
 	@echo $($*)
 
-.PHONY: help setup_prev_release setup_curr_release setup_devel devel release
-.PHONY: prev_release curr_release devel
-.PHONY: clean_source clean_release clean_release clean_devel clean_index_html clean
+.PHONY: help clean clean_source clean_index_html
+.PHONY: clean_prev_release clean_curr_release clean_devel
+.PHONY: setup_prev_release setup_curr_release setup_devel
+.PHONY: curr_release prev_release devel
 
 # Due to both builds needing to share the generated source/conf.py
 .NOTPARALLEL:
