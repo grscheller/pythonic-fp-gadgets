@@ -23,4 +23,5 @@ uv.lock
 
 # build artifacts
 docs/build/
+docs/devel/
 docs/source/conf.py
