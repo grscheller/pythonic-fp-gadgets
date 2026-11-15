@@ -33,44 +33,34 @@ clean_index_html:
 clean: clean_prev_release clean_curr_release clean_devel clean_source clean_index_html
 	@echo Removed all doc build artifacts.
 
-setup_devel: clean_devel clean_index_html
-	@mkdir -p devel
-	@python3 gen_conf.py devel "$(DEVEL_VERSION)" "$(PROJECT_NAME)" "$(PYPI_NAME)" > source/conf.py
-	@echo Generating source/conf.py for devel
-
-setup_curr_release: clean_curr_release clean_index_html
-	@mkdir -p build/curr_release
-	@python3 gen_conf.py curr_release "$(CURR_RELEASE_VERSION)" "$(PROJECT_NAME)" "$(PYPI_NAME)" > source/conf.py
-	@echo Generating source/conf.py for current release
-
-setup_prev_release: clean_prev_release clean_index_html
-	@mkdir -p build/prev_release
-	@python3 gen_conf.py prev_release "$(PREV_ROLLING_RELEASE_VERSION)" "$(PROJECT_NAME)" "$(PYPI_NAME)" > source/conf.py
-	@sed -e 's/@CURR_RELEASE@/$(CURR_RELEASE_VERSION)/g'
-	@echo Generating source/conf.py for previous release
-
 build/index.html: index.html.in Makefile
 	@mkdir -p build
-	@sed
-		-e 's/@DEVEL@/$(DEVEL_VERSION)/g' \
-		-e 's/@CURR_RELEASE@/$(CURR_RELEASE_VERSION)/g' \
-		-e 's/@DEVEL@/$(DEVEL_VERSION)/g' \
-		-e 's/@PREV_RELEASE@/$(PREV_RELEASE_VERSION)/g' \
-		-e 's/@PROJECTNAME@/$(PROJECT_NAME)/g' \
-		-e 's/@PYPINAME@/$(PYPI_NAME)/g' \
-		$< > $@
+	@sed -e 's/@DEVEL@/$(DEVEL_VERSION)/g' \
+		 -e 's/@CURR_RELEASE@/$(CURR_RELEASE_VERSION)/g' \
+		 -e 's/@DEVEL@/$(DEVEL_VERSION)/g' \
+		 -e 's/@PREV_RELEASE@/$(PREV_RELEASE_VERSION)/g' \
+		 -e 's/@PROJECTNAME@/$(PROJECT_NAME)/g' \
+		 -e 's/@PYPINAME@/$(PYPI_NAME)/g' \
+		 $< > $@
 
-# Build current release labeled docs
-curr_release: setup_curr_release build/index.html
-	@$(SPHINXBUILD) -b html source build/curr_release $(SPHINXOPTS)
+devel:        DOCS_TYPE = devel
+devel:        VERSION   = $(DEVEL_VERSION)
+devel:        OUTDIR    = devel
+curr_release: DOCS_TYPE = curr_release
+curr_release: VERSION   = $(CURR_RELEASE_VERSION)
+curr_release: OUTDIR    = build/curr_release
+prev_release: DOCS_TYPE = prev_release
+prev_release: VERSION   = $(PREV_RELEASE_VERSION)
+prev_release: OUTDIR    = build/prev_release
 
-# Build previous release labeled docs
-prev_release: setup_prev_release build/index.html
-	@$(SPHINXBUILD) -b html source build/prev_release $(SPHINXOPTS)
+# The published builds also need the landing page
+curr_release prev_release: build/index.html
 
-# Build development labeled docs
-devel: setup_devel
-	@$(SPHINXBUILD) -b html source devel $(SPHINXOPTS)
+devel curr_release prev_release:
+	@rm -rf '$(OUTDIR)'
+	@python3 gen_conf.py $(DOCS_TYPE) '$(VERSION)' '$(PROJECT_NAME)' '$(PYPI_NAME)' > source/conf.py
+	@echo Generated source/conf.py for $(DOCS_TYPE)
+	@$(SPHINXBUILD) -b html source '$(OUTDIR)' $(SPHINXOPTS)
 
 # Expose Makefile variables to scripts: make print-DEVEL_VERSION
 print-%:
@@ -78,7 +68,6 @@ print-%:
 
 .PHONY: help clean clean_source clean_index_html
 .PHONY: clean_prev_release clean_curr_release clean_devel
-.PHONY: setup_prev_release setup_curr_release setup_devel
 .PHONY: curr_release prev_release devel
 
 # Due to both builds needing to share the generated source/conf.py
