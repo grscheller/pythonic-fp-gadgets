@@ -40,7 +40,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y graphviz
 
-      - name: Build Development Docs (check only, do not publish)
+      - name: Build Development Docs (check only, do not deploy)
         env:
           UV_PROJECT_ENVIRONMENT: .venv-devel
         run: |
